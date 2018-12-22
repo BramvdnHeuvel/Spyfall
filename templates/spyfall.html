@@ -5,6 +5,13 @@
                 var button = document.getElementById(name);
                 button.style.backgroundColor =
                     button.style.backgroundColor != "rgba(255, 0, 0, 0.3)" ? "rgba(255, 0, 0, 0.3)" : "green";
+
+                var strikethrough = '<del>' + button.innerText + '</del>'
+                if (button.innerHTML === strikethrough) {
+                    button.innerHTML = button.innerText;
+                } else {
+                    button.innerHTML = strikethrough;
+                }
             }
         </script>
 
