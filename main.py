@@ -4,7 +4,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def welcome_buddy():
-    return render_template('main.html')
+    names = ["Bram", "Sam", "Sietse", "Mick", "Larissa", "Mark"]
+    locations = ["Supermarkt", "Snackbar", "Het huis van Brams imaginaire vriendin", "Diemen-zuid"]
+    return render_template('spyfall.html', names = names, locations = locations)
 
 @app.route('/hello/<name>')
 def welcome_name(name):
