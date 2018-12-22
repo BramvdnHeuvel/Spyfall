@@ -30,6 +30,8 @@ def answer(channel):
         Generators with matching "channel" input will receive the same messages.
     """
     __make_setup(channel)
+    Messenger.listened[channel].append(threading.current_thread())
+    
     while True:
         cv.acquire()
 
