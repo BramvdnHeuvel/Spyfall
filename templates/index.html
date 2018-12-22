@@ -47,9 +47,15 @@
                 frame: 'menuView'
             }
         });
-
+        
         function changeView(newView) {
+            console.log("Changing view to " + newView + '...');
             viewer.frame = newView
         }
+    </script>
+    <script src='/static/stream_listener.js'></script>
+    <script>
+        console.log('Creating EventSource!')
+        var stream_listener = listentoStream('yay');
     </script>
 </body>
