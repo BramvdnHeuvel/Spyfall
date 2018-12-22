@@ -8,7 +8,7 @@ def welcome_buddy():
 
 @app.route('/hello/<name>')
 def welcome_name(name):
-    return "Wat een Snork ben je {}".format(name)\
+    return "Wat een Snorks zijn jullie Bram & {}".format(name)
 
 @app.route('/pepernoot')
 def pepernoot():
