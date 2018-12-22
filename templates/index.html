@@ -9,7 +9,15 @@
     <div id="frames">
         <!-- Main Menu -->
         <div v-if="frame == 'menuView'">
-            <p>This is the main screen!</p>
+            <div id="mainTitle">
+                <div id="title">
+                    <p>Spyfall</p>
+                </div>
+                <div style="text-align: center">
+                    <button v-on:click="frame = 'createScreen'">START GAME</button>
+                    <button v-on:click="frame = 'joinScreen'">JOIN GAME</button>
+                </div>
+            </div>
         </div>
 
         <!-- Screen for users to join game -->
@@ -39,5 +47,9 @@
                 frame: 'menuView'
             }
         });
+
+        function changeView(newView) {
+            viewer.frame = newView
+        }
     </script>
 </body>

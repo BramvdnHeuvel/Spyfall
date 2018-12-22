@@ -1,0 +1,13 @@
+#mainTitle {
+    font-size: 144px;
+    
+    width: 50%;
+    margin: auto;
+}
+
+#title {
+    display:flex;
+    
+    justify-content:center;
+    align-items:center;
+}
