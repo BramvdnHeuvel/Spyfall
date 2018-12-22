@@ -1,0 +1,27 @@
+<head>
+    <title>Spyfall</title>
+    <script>
+        function validateInput() {
+            var name, groupName;
+
+            /* Get the value of the input field with id="name" */
+            name = document.getElementById("name").value;
+            groupName = document.getElementById("groupName").value;
+
+            /*  */
+            document.getElementById("nameView").innerHTML = name;
+        }    
+    </script>
+</head>
+<body>
+    <h1>SPYFALL</h1>
+    <p>Enter your name:</p>
+    <input id="name">
+    <p>Enter groupname:</p>
+    <input id="groupName"><br>
+    <button type="button" onclick="validateInput()">
+        Add me!
+    </button><br>
+
+    <p id="nameView"></p>
+</body>
