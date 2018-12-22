@@ -10,5 +10,11 @@ def functie():
 def main():
     return render_template('main.html')
 
+@app.route('/welcome')
+def welcome_buddy():
+    names = ["Bram", "Sam", "Sietse", "Mick", "Larissa", "Mark"]
+    locations = ["Supermarkt", "Snackbar", "Het huis van Brams imaginaire vriendin", "Diemen-zuid"]
+    return render_template('spyfall.html', names = names, locations = locations)
+
 app.run(debug = True)
 
