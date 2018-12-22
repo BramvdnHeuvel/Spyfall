@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -12,6 +12,12 @@ def welcome_name(name):
 
 @app.route('/pepernoot')
 def pepernoot():
-    return render_template("template.html")
+    ingredients = ['Water', 'Pepper', 'Nuts', 'Brams broertje', 'Bram']
+    return render_template("template.html", lijst=ingredients)
+
+@app.route('/api/pepernoot')
+def data_ophalen():
+    ingredients = ['Water', 'Pepper', 'Nuts', 'Brams broertje', 'Bram']
+    return jsonify(ingredients)
 
 app.run(debug = True)

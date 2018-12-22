@@ -8,6 +8,17 @@
     <P style="color:aqua">
         Welkom bij mijn spreekbeurt over mijn cavia.
     </P>
+    <P>
+        De ingredienten voor pepernoten zijn:
+        <ul>
+            {% for ingredient in lijst %}
+            <li>
+                {{ingredient}}
+            </li>
+            {% endfor %}
+        </ul>
+    </P>
+    <img src="/static/cavia op een paprika.jpg" alt="paprika of cavia?">
 
 </body>
 
