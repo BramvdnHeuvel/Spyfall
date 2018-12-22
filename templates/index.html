@@ -1,0 +1,43 @@
+<head>
+    <title>
+        X-Files Spyfall
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main_style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+</head>
+<body>
+    <div id="frames">
+        <!-- Main Menu -->
+        <div v-if="frame == 'menuView'">
+            <p>This is the main screen!</p>
+        </div>
+
+        <!-- Screen for users to join game -->
+        <div v-if="frame == 'joinScreen'">
+            <p>Yay! This is the screen to join a game!</p>
+        </div>
+
+        <!-- Screen for users to create game -->
+        <div v-if="frame == 'createScreen'">
+            <p style="color:red">Let's create a new group!</p>
+        </div>
+
+        <!-- Screen for users to view game hub -->
+        <div v-if="frame == 'gameMenu'">
+            <h1>Game Menu already! Woohoo!</h1>
+        </div>
+
+        <!-- View during a game -->
+        <div v-if="frame == 'gameView'">
+            <p>Yay! A Game has started!</p>
+        </div>
+    </div>
+    <script>
+        var viewer = new Vue({
+            el: "#frames",
+            data: {
+                frame: 'menuView'
+            }
+        });
+    </script>
+</body>
