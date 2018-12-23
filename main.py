@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, jsonify
 from res import stream
-import res.data
+import res.data as data
 
 app = Flask(__name__)
 
@@ -38,7 +38,11 @@ visitors = []
 
 @app.route('/api/v1/<group>/players')
 def get_players(group):
-    return groups[group].players
+    try:
+        info = {"players" : list(data.groups[group].players.keys())}
+    except KeyError:
+        info = {"players" : []}
+    return jsonify(info)
     # TODO: Return a list of players in a given group
     # The client expects a dictionary with at least the following properties:
     # {
@@ -48,7 +52,7 @@ def get_players(group):
 @app.route('/api/v1/<group>/leave/<name>')
 def leave_group(group, name):
     try:
-        del groups[group].players[name]
+        del data.groups[group].players[name]
         return jsonify({"succesful" : True})
     except KeyError:
         return jsonify({"succesful" : False})
@@ -59,9 +63,9 @@ def leave_group(group, name):
     # }
 
 @app.route('/api/v1/creategroup/<name>')
-def creategroup(name)
-    id = create_group(name)
-    return {"succesful" : True, "groupname" : id}
+def creategroup(name):
+    id = data.create_group(name)
+    return jsonify({"succesful" : True, "groupname" : id})
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
@@ -74,6 +78,11 @@ def join_group(group, name):
 
 @app.route('/api/v1/<group>/myrole/<name>')
 def discover_role(group, name):
+    try:
+        info = {"role" : data.groups[group].players[name].role}
+    except KeyError:
+        info = {"role" : None}
+    return jsonify(info)
     pass # TODO: Receive a one-time object with the player's role and location
     # The client expects a dictionary with at least the following properties:
     # {

@@ -1,12 +1,13 @@
 import sqlite3
 import config
+import random
 
 groups = {}
 
 class group:
     def __init__(self, name):
-        player = player(name, "none")
-        self.players = {player}
+        newplayer = player(name, "none")
+        self.players = {name : newplayer}
         self.locations = []
 
 class player:
@@ -31,6 +32,7 @@ def create_group(name):
     existing_ids = groups.keys()
     id = generate_random_id(existing_ids)
     groups[id] = group(name)
+    return id
 
 
 
