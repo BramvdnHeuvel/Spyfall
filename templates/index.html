@@ -33,16 +33,10 @@
         <!-- Screen for users to view game hub -->
         <div v-if="frame == 'gameMenu'">
             <h1>Game Menu already! Woohoo!</h1>
-            <div v-for="player in players">
-                <button id="node_button" v-on:click="clickUser">
-                    <span v-if="player.crossed">
-                        {% raw %}<del>{{ player.name }}</del>{% endraw %}
-                    </span>
-                    <span v-if="!(player.crossed)">
-                        {% raw %}{{ player.name }}{% endraw %}
-                    </span>
-                </button><br>
-            </div>
+            <checkbutton
+                v-for="player in players"
+                v-bind:title="player"
+            ></checkbutton><br>
         </div>
 
         <!-- View during a game -->
@@ -56,9 +50,9 @@
             data: {
                 frame: 'menuView',
                 players: [
-                    {name: 'Bram', crossed: false},
-                    {name: 'Sam', crossed: false},
-                    {name: 'Mark', crossed: false}
+                    {name: 'Bram'},
+                    {name: 'Sam'},
+                    {name: 'Mark'}
                 ]
             },
             methods: {
@@ -67,7 +61,7 @@
                         .then((response) => {return response.json()})
                         .then((data) => {
                             console.log(data);
-                            this.players = data.map((user) => ({name: user, crossed: false}));
+                            this.players = data.map((user) => ({name: user}));
                         });
                 },
 
@@ -94,6 +88,26 @@
             console.log("Changing view to " + newView + '...');
             viewer.frame = newView
         }
+
+        Vue.component('checkbutton', {
+            props: ['title'],
+            data: function() {
+                return {
+                    crossed: false
+                }
+            },
+            template: `
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-if="crossed" style="background-color:rgba(255, 0, 0, 0.3);">
+                        {% raw %}<del>{{ title.name }}</del>{% endraw %}
+                </button>
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-else style="background-color:green;">
+                        {% raw %}{{ title.name }}{% endraw %}
+                </button>`
+        })
     </script>
     <script src='/static/stream_listener.js'></script>
     <script>
