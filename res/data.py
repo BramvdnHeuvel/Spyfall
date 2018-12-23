@@ -34,5 +34,18 @@ def create_group(name):
     groups[id] = group(name)
     return id
 
+def joingroup(group,name):
+    information = {"succesful" : False, "players" : []}
+
+    if group in groups.keys():
+        information["succesful"] = True
+        new_player = player(name, "none")
+        groups[group].players[name] = new_player
+        lijst = list(groups[group].players.keys())
+        information["players"] = lijst
+        return information
+
+    return information
+
 
 

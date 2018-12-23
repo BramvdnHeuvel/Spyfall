@@ -69,7 +69,8 @@ def creategroup(name):
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
-    pass # TODO: Join a group if there isn't already an (active) player with that name.
+    return jsonify(data.joingroup(group, name))
+    # TODO: Join a group if there isn't already an (active) player with that name.
     # The client expects a dictionary with at least the following properties:
     # {
     #   successful  - (Bool whether the kick was succesful)
