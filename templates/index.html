@@ -4,6 +4,7 @@
     </title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main_style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="static/script.js"></script>
 </head>
 <body>
     <div id="frames">
@@ -28,6 +29,14 @@
         <!-- Screen for users to create game -->
         <div v-if="frame == 'createScreen'">
             <p style="color:red">Let's create a new group!</p>
+            <h1>Spyfall: X-files edition</h1>
+            <p>Enter your name:</p>
+            <input id="name">
+            <button type="button" onclick="createGame()">
+                Create game!
+            </button><br>
+
+            <p id="createView"></p>
         </div>
 
         <!-- Screen for users to view game hub -->

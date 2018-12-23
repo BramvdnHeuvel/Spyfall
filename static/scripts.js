@@ -5,7 +5,6 @@ function validateInput() {
     name = document.getElementById("name").value;
     groupName = document.getElementById("groupName").value;
 
-    /*  */
     if (name == "" || groupName == "")
         text = "Name or groupname cannot be empty!";
     else
@@ -13,8 +12,15 @@ function validateInput() {
     document.getElementById("nameView").innerHTML = text;
 }
 
-function cross(name) {
-    var button = document.getElementById("button_{{name}}");
-    
-    button.firstChild.data = "Poffertjes";
-}
+// createGame: function() {
+//     var text;
+//     fetch('/api/v1/creategroup')
+//         .then((response) => response.json())
+//         .then((data) => ({
+//             data.groupName;
+//             if (data.success) {
+//                 text = data.groupName;
+//             }
+
+//         }));
+// }

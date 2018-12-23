@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def functie():
-    stream.new_msg('Hey there, kid!','yay')
-    return render_template('spyfall.html',names=['sam','mark'],locations=['strand', 'duinen'])
+    return render_template('index.html')
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
