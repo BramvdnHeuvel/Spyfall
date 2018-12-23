@@ -12,4 +12,8 @@ def welcome_buddy():
 def welcome_name(name):
     return "Hello {}!".format(name)
 
+@app.route('/spyfall.html')
+def goto_spyfall():
+    return render_template('spyfall.html')
+
 app.run(debug = True)

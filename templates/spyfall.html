@@ -40,3 +40,30 @@
             </button><br>
         {% endfor %}
     </body>
+<head>
+    <title>SPYFALL!</title>
+    <script>
+        function cross(name) {
+        var button = document.getElementById("button_sam");
+        console.log(button);
+        button.firstChild.data = "Sam";}
+    </script>
+</head>
+<body>
+    <h1>SPYFALL!</h1>
+    <button id = "button_sam" type = "button" onclick="cross('sam')">
+        sam
+    </button>
+    <!-- {% for name in names %}
+        <button id="button_{{name}}" type="button" onclick="cross('{{name}}')">
+            {{name}}
+        </button><br>
+    {% endfor %} -->
+
+    <!-- {% for location in locations %}
+        <button type="button" onclick="cross()">
+            {{location}}
+        </button><br>
+    {% endfor %} -->
+    
+</body>

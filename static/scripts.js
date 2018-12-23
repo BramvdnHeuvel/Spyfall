@@ -1,5 +1,5 @@
 function validateInput() {
-    var name, groupName, text;
+    var name, groupName, text, delayHref, correct = 0;
 
     /* Get the value of the input field with id="name" */
     name = document.getElementById("name").value;
@@ -9,8 +9,13 @@ function validateInput() {
     if (name == "" || groupName == "")
         text = "Name or groupname cannot be empty!";
     else
-        text = "Hello " + name + "! Your group is: " + groupName;
+        hrefCall();
     document.getElementById("nameView").innerHTML = text;
+
+}
+
+function hrefCall() {
+    document.getElementById('goSpyfall').click();
 }
 
 function cross(name) {
