@@ -12,9 +12,9 @@ function validateInput() {
     document.getElementById("nameView").innerHTML = text;
 }
 
-// createGame: function() {
+// createGame: function(name) {
 //     var text;
-//     fetch('/api/v1/creategroup')
+//     fetch('/api/v1/creategroup/{{name}}')
 //         .then((response) => response.json())
 //         .then((data) => ({
 //             data.groupName;
