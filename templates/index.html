@@ -37,6 +37,10 @@
                 v-for="player in players"
                 v-bind:title="player"
             ></checkbutton><br>
+            <div style="text-align: center">
+                <button v-on:click="leaveGroup">LEAVE GROUP</button>
+                <button v-on:click="frame = 'joinScreen'">START GAME</button>
+            </div>
         </div>
 
         <!-- View during a game -->
@@ -44,51 +48,8 @@
             <p>Yay! A Game has started!</p>
         </div>
     </div>
+    <script src="/static/viewer.js"></script>
     <script>
-        var viewer = new Vue({
-            el: "#frames",
-            data: {
-                frame: 'menuView',
-                players: [
-                    {name: 'Bram'},
-                    {name: 'Sam'},
-                    {name: 'Mark'}
-                ]
-            },
-            methods: {
-                updateUsers: function(group) {
-                    fetch('/api/v1/' + group + '/players')
-                        .then((response) => {return response.json()})
-                        .then((data) => {
-                            console.log(data);
-                            this.players = data.map((user) => ({name: user}));
-                        });
-                },
-
-                // Used to toggle style on clicked user lists
-                clickUser: function(event) {
-                    var button = event.target;
-                    var user = this.players.find(x => x.name === button.innerText);
-
-                    while (button.type != 'submit') {
-                        button = button.parentElement;
-                    }
-
-                    user.crossed = !user.crossed;
-                    if (user.crossed) {
-                        button.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
-                    } else {
-                        button.style.backgroundColor = "green";
-                    }
-                }
-            }
-        });
-        
-        function changeView(newView) {
-            console.log("Changing view to " + newView + '...');
-            viewer.frame = newView
-        }
-
         Vue.component('checkbutton', {
             props: ['title'],
             data: function() {
@@ -115,10 +76,7 @@
         viewer.updateUsers();
 
         var stream_listener = listentoStream('yay', function(message) {
-            changeView("gameMenu");
-            console.log(message);
             if (message === "USER UPDATE") {
-
                 viewer.updateUsers();
             }
         });
