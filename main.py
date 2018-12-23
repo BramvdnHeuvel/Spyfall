@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def functie():
-    stream.new_msg('Hey there, kid!','yay')
-    return render_template('spyfall.html',names=['sam','mark'],locations=['strand', 'duinen'])
+    stream.send_msg('Hey there, kid!','yay')
+    return jsonify()
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
@@ -64,8 +64,8 @@ def join_group(group, name):
 def show_game(name):
     global visitors
     visitors.append(name)
-    stream.new_msg("USER UPDATE", 'yay')
-    return render_template('index.html')
+    stream.send_msg("USER UPDATE", 'yay')
+    return render_template('index.html', name=name)
 
 app.run(debug = True)
 
