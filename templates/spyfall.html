@@ -1,0 +1,49 @@
+<head>
+        <title>SPYFALL!</title>
+        <script>
+            function cross(name) {
+                var button = document.getElementById(name);
+                button.style.backgroundColor =
+                    button.style.backgroundColor != "rgba(255, 0, 0, 0.3)" ? "rgba(255, 0, 0, 0.3)" : "green";
+
+                var strikethrough = '<del>' + button.innerText + '</del>'
+                if (button.innerHTML === strikethrough) {
+                    button.innerHTML = button.innerText;
+                } else {
+                    button.innerHTML = strikethrough;
+                }
+            }
+        </script>
+
+        <style>
+            .button {
+                background-color: green;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>SPYFALL!</h1>
+        <h2>Players</h2>
+        {% for name in names %}
+            <button class="button" id="{{name}}" onclick="cross('{{name}}')">
+                {{name}}
+            </button><br>
+        {% endfor %}
+    
+        <h2>Locations</h2>
+        {% for location in locations %}
+            <button class="button" id="{{location}}" onclick="cross('{{location}}')">
+                {{location}}
+            </button><br>
+        {% endfor %}
+    </body>
