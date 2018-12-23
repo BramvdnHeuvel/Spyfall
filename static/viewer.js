@@ -30,6 +30,15 @@ var viewer = new Vue({
             this.frame = 'menuView';
         },
 
+        joinGroup: function(event){
+            frame="gameMenu";
+            var self = this;
+            getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
+                console.log(data);
+                self.players = data.players;
+            });
+
+        }
         // Used to toggle style on clicked user lists
         clickUser: function(event) {
             var button = event.target;
