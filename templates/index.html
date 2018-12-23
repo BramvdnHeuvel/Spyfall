@@ -62,6 +62,16 @@
                 ]
             },
             methods: {
+                updateUsers: function(group) {
+                    fetch('/api/v1/' + group + '/players')
+                        .then((response) => {return response.json()})
+                        .then((data) => {
+                            console.log(data);
+                            this.players = data.map((user) => ({name: user, crossed: false}));
+                        });
+                },
+
+                // Used to toggle style on clicked user lists
                 clickUser: function(event) {
                     var button = event.target;
                     var user = this.players.find(x => x.name === button.innerText);
@@ -88,6 +98,15 @@
     <script src='/static/stream_listener.js'></script>
     <script>
         console.log('Creating EventSource!')
-        var stream_listener = listentoStream('yay');
+        viewer.updateUsers();
+
+        var stream_listener = listentoStream('yay', function(message) {
+            changeView("gameMenu");
+            console.log(message);
+            if (message === "USER UPDATE") {
+
+                viewer.updateUsers();
+            }
+        });
     </script>
 </body>

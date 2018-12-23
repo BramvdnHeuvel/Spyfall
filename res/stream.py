@@ -42,5 +42,5 @@ def answer(channel):
         Messenger.listened[channel].append(threading.current_thread())
         cv.release()
 
-        yield f'data: {important_message} \n\n'
+        yield f'data: {important_message}\n\n'
         
