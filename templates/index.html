@@ -33,6 +33,16 @@
         <!-- Screen for users to view game hub -->
         <div v-if="frame == 'gameMenu'">
             <h1>Game Menu already! Woohoo!</h1>
+            <div v-for="player in players">
+                <button id="node_button" v-on:click="clickUser">
+                    <span v-if="player.crossed">
+                        {% raw %}<del>{{ player.name }}</del>{% endraw %}
+                    </span>
+                    <span v-if="!(player.crossed)">
+                        {% raw %}{{ player.name }}{% endraw %}
+                    </span>
+                </button><br>
+            </div>
         </div>
 
         <!-- View during a game -->
@@ -44,7 +54,29 @@
         var viewer = new Vue({
             el: "#frames",
             data: {
-                frame: 'menuView'
+                frame: 'menuView',
+                players: [
+                    {name: 'Bram', crossed: false},
+                    {name: 'Sam', crossed: false},
+                    {name: 'Mark', crossed: false}
+                ]
+            },
+            methods: {
+                clickUser: function(event) {
+                    var button = event.target;
+                    var user = this.players.find(x => x.name === button.innerText);
+
+                    while (button.type != 'submit') {
+                        button = button.parentElement;
+                    }
+
+                    user.crossed = !user.crossed;
+                    if (user.crossed) {
+                        button.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+                    } else {
+                        button.style.backgroundColor = "green";
+                    }
+                }
             }
         });
         
