@@ -1,18 +1,20 @@
 import sqlite3
 import config
 
-class Database:
+class groups:
     def __init__(self):
-        pass
-    
-    def get_users(self, group):
-        return ['Bram', 'Sietse', 'Mick', 'Larissa', 'Mark', 'Sam']
-    
-    def add_user(self, user, group):
-        pass
-    
-    def del_user(self, user, group):
-        pass
+        self.groups = {}
 
-    def group_exist(self, group):
-        return False
+class group:
+    def __init__(self):
+        self.players = {}
+        self.locations = []
+
+class player:
+    def __init__(self, name, role, leader):
+        self.name = name
+        self.role = role
+        self.leader = leader
+
+
+
