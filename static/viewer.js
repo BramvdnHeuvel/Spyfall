@@ -11,21 +11,18 @@ var viewer = new Vue({
         ]
     },
     methods: {
-        updateUsers: function(group) {
-            fetch('/api/v1/' + group + '/players')
-                .then((response) => {return response.json()})
-                .then((data) => {
-                    this.players = data.map((user) => ({name: user}));
-                });
+        updateUsers: function() {
+            var self = this;
+            getData('/api/v1/' + this.group + '/players', function(data) {
+                self.players = data.map((user) => ({name: user}));
+            });
         },
 
         leaveGroup: function(event) {
             console.log("Leaving group!");
-            fetch('/api/v1/' + this.group + '/leave/' + this.myName)
-                .then((response) => {return response.json()})
-                .then((data) => {
-                    // Leave empty if nothing useful is returned.
-                })
+            getData('/api/v1/' + this.group + '/leave/' + this.myName, function(data) {
+                // Leave empty, 'cause nothing useful is returned.
+            })
             this.group = undefined;
             this.frame = 'menuView';
         },
