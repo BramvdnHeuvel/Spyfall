@@ -9,6 +9,7 @@ class group:
         newplayer = player(name, "none")
         self.players = {name : newplayer}
         self.locations = []
+        self.started = False
 
 class player:
     def __init__(self, name, role):

@@ -69,6 +69,7 @@ def creategroup(name):
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
+    stream.send_msg("USER UPDATE", group)
     return jsonify(data.joingroup(group, name))
     # TODO: Join a group if there isn't already an (active) player with that name.
     # The client expects a dictionary with at least the following properties:
@@ -94,13 +95,11 @@ def discover_role(group, name):
 
 @app.route('/api/v1/<group>/start')
 def start_game(group):
-    pass # TODO: Create a function that starts the game for all users in that group
-    # Make sure only to start a game if there isn't already a game going on.
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   players     - (List of player objects)
-    #   locations   - (List of location strings)
-    # }
+    data.groups[group].started = True
+    stream.send_msg("GAME STARTED", group)
+
+    return jsonify({"players" : list(data.groups[group].players.keys()), "locations" : data.groups[group].locations})
+
 
 @app.route('/game/<name>')
 def show_game(name):
