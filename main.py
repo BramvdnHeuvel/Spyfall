@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, jsonify
 from res import stream
+import res.data
 
 app = Flask(__name__)
 
@@ -37,7 +38,8 @@ visitors = []
 
 @app.route('/api/v1/<group>/players')
 def get_players(group):
-    pass # TODO: Return a list of players in a given group
+    return groups[group].players
+    # TODO: Return a list of players in a given group
     # The client expects a dictionary with at least the following properties:
     # {
     #   players - (List of player objects)
@@ -45,11 +47,21 @@ def get_players(group):
 
 @app.route('/api/v1/<group>/leave/<name>')
 def leave_group(group, name):
-    pass # TODO: Kick a given player from a given group
+    try:
+        del groups[group].players[name]
+        return jsonify({"succesful" : True})
+    except KeyError:
+        return jsonify({"succesful" : False})
+    # TODO: Kick a given player from a given group
     # The client expects a dictionary with at least the following properties:
     # {
     #   successful - (Bool whether the kick was succesful)
     # }
+
+@app.route('/api/v1/creategroup/<name>')
+def creategroup(name)
+    id = create_group(name)
+    return {"succesful" : True, "groupname" : id}
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
@@ -68,4 +80,3 @@ def show_game(name):
     return render_template('index.html')
 
 app.run(debug = True)
-

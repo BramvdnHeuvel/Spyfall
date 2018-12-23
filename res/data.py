@@ -1,20 +1,36 @@
 import sqlite3
 import config
 
-class groups:
-    def __init__(self):
-        self.groups = {}
+groups = {}
 
 class group:
-    def __init__(self):
-        self.players = {}
+    def __init__(self, name):
+        player = player(name, "none")
+        self.players = {player}
         self.locations = []
 
 class player:
-    def __init__(self, name, role, leader):
+    def __init__(self, name, role):
         self.name = name
         self.role = role
-        self.leader = leader
+
+def generate_random_id(exclude):
+    while(True):
+        id = ""
+        for i in range(6):
+            random_int = random.randint(1,36)
+            if(random_int <= 26):
+                random_int += 96
+            else:
+                random_int += 21
+            id += str(chr(random_int))
+        if not id in exclude:
+            return id
+
+def create_group(name):
+    existing_ids = groups.keys()
+    id = generate_random_id(existing_ids)
+    groups[id] = group(name)
 
 
 
