@@ -1,0 +1,61 @@
+<head> 
+    <title>Spyfall</title> 
+    <script> 
+        function validateInput() { 
+            var name, groupName; 
+ 
+            /* Get the value of the input field with id="name" */ 
+            name = document.getElementById("name").value; 
+            groupName = document.getElementById("groupName").value; 
+ 
+            /*  */ 
+            document.getElementById("nameView").innerHTML = name; 
+        }     
+    </script> 
+    <style>
+        body {
+            background-color: rgb(175, 215, 255);
+        }
+        p {
+            color: black;
+            text-align: center;
+        }
+        h1 {
+            color: #222222;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF60;
+            border: 2px solid #555555;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;}
+        center {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+
+    </style>
+</head> 
+<body> 
+    <h1>SPYFALL</h1> 
+    <p>Enter your name:</p> 
+    <input id="name"> 
+    <p>Enter groupname:</p> 
+    <input id="groupName"><br> 
+    <button type="button", class="center", onclick="validateInput()"> 
+        add me! 
+    </button><br> 
+
+ 
+    <p id="nameView"></p> 
+</body>
