@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def functie():
-    stream.send_msg('Hey there, kid!','yay')
-    return jsonify()
+    return render_template('index.html')
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
