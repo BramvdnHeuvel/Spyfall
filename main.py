@@ -69,6 +69,16 @@ def discover_role(group, name):
     # }
     # If the player's role has already been discovered, send an error value.
 
+@app.route('/api/v1/<group>/start')
+def start_game(group):
+    pass # TODO: Create a function that starts the game for all users in that group
+    # Make sure only to start a game if there isn't already a game going on.
+    # The client expects a dictionary with at least the following properties:
+    # {
+    #   players     - (List of player objects)
+    #   locations   - (List of location strings)
+    # }
+
 @app.route('/game/<name>')
 def show_game(name):
     global visitors
