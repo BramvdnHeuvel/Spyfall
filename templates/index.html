@@ -1,0 +1,126 @@
+<head>
+    <title>
+        X-Files Spyfall
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main_style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+</head>
+<body>
+    <div id="frames">
+        <!-- Main Menu -->
+        <div v-if="frame == 'menuView'">
+            <div id="mainTitle">
+                <div id="title">
+                    <p>Spyfall</p>
+                </div>
+                <div style="text-align: center">
+                    <button v-on:click="frame = 'createScreen'">START GAME</button>
+                    <button v-on:click="frame = 'joinScreen'">JOIN GAME</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen for users to join game -->
+        <div v-if="frame == 'joinScreen'">
+            <p>Yay! This is the screen to join a game!</p>
+        </div>
+
+        <!-- Screen for users to create game -->
+        <div v-if="frame == 'createScreen'">
+            <p style="color:red">Let's create a new group!</p>
+        </div>
+
+        <!-- Screen for users to view game hub -->
+        <div v-if="frame == 'gameMenu'">
+            <h1>Game Menu already! Woohoo!</h1>
+            <checkbutton
+                v-for="player in players"
+                v-bind:title="player"
+            ></checkbutton><br>
+        </div>
+
+        <!-- View during a game -->
+        <div v-if="frame == 'gameView'">
+            <p>Yay! A Game has started!</p>
+        </div>
+    </div>
+    <script>
+        var viewer = new Vue({
+            el: "#frames",
+            data: {
+                frame: 'menuView',
+                players: [
+                    {name: 'Bram'},
+                    {name: 'Sam'},
+                    {name: 'Mark'}
+                ]
+            },
+            methods: {
+                updateUsers: function(group) {
+                    fetch('/api/v1/' + group + '/players')
+                        .then((response) => {return response.json()})
+                        .then((data) => {
+                            console.log(data);
+                            this.players = data.map((user) => ({name: user}));
+                        });
+                },
+
+                // Used to toggle style on clicked user lists
+                clickUser: function(event) {
+                    var button = event.target;
+                    var user = this.players.find(x => x.name === button.innerText);
+
+                    while (button.type != 'submit') {
+                        button = button.parentElement;
+                    }
+
+                    user.crossed = !user.crossed;
+                    if (user.crossed) {
+                        button.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+                    } else {
+                        button.style.backgroundColor = "green";
+                    }
+                }
+            }
+        });
+        
+        function changeView(newView) {
+            console.log("Changing view to " + newView + '...');
+            viewer.frame = newView
+        }
+
+        Vue.component('checkbutton', {
+            props: ['title'],
+            data: function() {
+                return {
+                    crossed: false
+                }
+            },
+            template: `
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-if="crossed" style="background-color:rgba(255, 0, 0, 0.3);">
+                        {% raw %}<del>{{ title.name }}</del>{% endraw %}
+                </button>
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-else style="background-color:green;">
+                        {% raw %}{{ title.name }}{% endraw %}
+                </button>`
+        })
+    </script>
+    <script src='/static/stream_listener.js'></script>
+    <script>
+        console.log('Creating EventSource!')
+        viewer.updateUsers();
+
+        var stream_listener = listentoStream('yay', function(message) {
+            changeView("gameMenu");
+            console.log(message);
+            if (message === "USER UPDATE") {
+
+                viewer.updateUsers();
+            }
+        });
+    </script>
+</body>
