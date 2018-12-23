@@ -36,7 +36,7 @@ visitors = []
 
 @app.route('/api/v1/<group>/players')
 def get_players(group):
-    pass # TODO: Return a list of players in a given group
+    return ["Sam", "Mark"] # TODO: Return a list of players in a given group
     # The client expects a dictionary with at least the following properties:
     # {
     #   players - (List of player objects)
@@ -85,6 +85,11 @@ def show_game(name):
     visitors.append(name)
     stream.send_msg("USER UPDATE", 'yay')
     return render_template('index.html', name=name)
+
+# TODO: Remove, use Micks
+@app.route('/api/v1/creategroup/<name>')
+def create_game(name):
+    pass
 
 
 app.run(debug = True)

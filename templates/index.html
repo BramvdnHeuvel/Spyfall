@@ -29,11 +29,10 @@
 
         <!-- Screen for users to create game -->
         <div v-if="frame == 'createScreen'">
-            <p style="color:red">Let's create a new group!</p>
             <h1>Spyfall: X-files edition</h1>
             <p>Enter your name:</p>
-            <input id="name">
-            <button type="button" onclick="createGame()">
+            <input id="nameCreate">
+            <button v-on:click="createGame">
                 Create game!
             </button><br>
 
