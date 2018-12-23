@@ -6,8 +6,7 @@ app = Flask(__name__)
 
 @app.route('/spyfall')
 def functie():
-    stream.send_msg('Hey there, kid!','yay')
-    return jsonify()
+    return render_template('index.html')
 
 
 @app.route('/stream/<channel>')
