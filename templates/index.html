@@ -42,15 +42,13 @@
         <!-- Screen for users to view game hub -->
         <div v-if="frame == 'gameMenu'">
             <h1>Game Menu already! Woohoo!</h1>
-            <div v-for="player in players">
-                <button id="node_button" v-on:click="clickUser">
-                    <span v-if="player.crossed">
-                        {% raw %}<del>{{ player.name }}</del>{% endraw %}
-                    </span>
-                    <span v-if="!(player.crossed)">
-                        {% raw %}{{ player.name }}{% endraw %}
-                    </span>
-                </button><br>
+            <checkbutton
+                v-for="player in players"
+                v-bind:title="player"
+            ></checkbutton><br>
+            <div style="text-align: center">
+                <button v-on:click="leaveGroup">LEAVE GROUP</button>
+                <button v-on:click="frame = 'joinScreen'">START GAME</button>
             </div>
         </div>
 
@@ -59,50 +57,27 @@
             <p>Yay! A Game has started!</p>
         </div>
     </div>
+    <script src="/static/viewer.js"></script>
     <script>
-        var viewer = new Vue({
-            el: "#frames",
-            data: {
-                frame: 'menuView',
-                players: [
-                    {name: 'Bram', crossed: false},
-                    {name: 'Sam', crossed: false},
-                    {name: 'Mark', crossed: false}
-                ]
-            },
-            methods: {
-                updateUsers: function(group) {
-                    fetch('/api/v1/' + group + '/players')
-                        .then((response) => {return response.json()})
-                        .then((data) => {
-                            console.log(data);
-                            this.players = data.map((user) => ({name: user, crossed: false}));
-                        });
-                },
-
-                // Used to toggle style on clicked user lists
-                clickUser: function(event) {
-                    var button = event.target;
-                    var user = this.players.find(x => x.name === button.innerText);
-
-                    while (button.type != 'submit') {
-                        button = button.parentElement;
-                    }
-
-                    user.crossed = !user.crossed;
-                    if (user.crossed) {
-                        button.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
-                    } else {
-                        button.style.backgroundColor = "green";
-                    }
+        Vue.component('checkbutton', {
+            props: ['title'],
+            data: function() {
+                return {
+                    crossed: false
                 }
-            }
-        });
-        
-        function changeView(newView) {
-            console.log("Changing view to " + newView + '...');
-            viewer.frame = newView
-        }
+            },
+            template: `
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-if="crossed" style="background-color:rgba(255, 0, 0, 0.3);">
+                        {% raw %}<del>{{ title.name }}</del>{% endraw %}
+                </button>
+                <button id='node_button'
+                    v-on:click='crossed=!(crossed)'
+                    v-else style="background-color:green;">
+                        {% raw %}{{ title.name }}{% endraw %}
+                </button>`
+        })
     </script>
     <script src='/static/stream_listener.js'></script>
     <script>
@@ -110,10 +85,7 @@
         viewer.updateUsers();
 
         var stream_listener = listentoStream('yay', function(message) {
-            changeView("gameMenu");
-            console.log(message);
             if (message === "USER UPDATE") {
-
                 viewer.updateUsers();
             }
         });
