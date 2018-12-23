@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def functie():
-    stream.new_msg('Hey there, kid!','yay')
-    return render_template('spyfall.html',names=['sam','mark'],locations=['strand', 'duinen'])
+    stream.send_msg('Hey there, kid!','yay')
+    return jsonify()
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
@@ -26,19 +26,57 @@ def welcome_buddy():
 def view_index():
     return render_template('index.html')
 
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -------------------   API   -------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
 visitors = []
 
 @app.route('/api/v1/<group>/players')
 def get_players(group):
-    global visitors
-    return jsonify(visitors)
+    pass # TODO: Return a list of players in a given group
+    # The client expects a dictionary with at least the following properties:
+    # {
+    #   players - (List of player objects)
+    # }
+
+@app.route('/api/v1/<group>/leave/<name>')
+def leave_group(group, name):
+    pass # TODO: Kick a given player from a given group
+    # The client expects a dictionary with at least the following properties:
+    # {
+    #   successful - (Bool whether the kick was succesful)
+    # }
+
+@app.route('/api/v1/<group>/join/<name>')
+def join_group(group, name):
+    pass # TODO: Join a group if there isn't already an (active) player with that name.
+    # The client expects a dictionary with at least the following properties:
+    # {
+    #   successful  - (Bool whether the kick was succesful)
+    #   players     - (List of player objects)
+    # }
+
+@app.route('/api/v1/<group>/myrole/<name>')
+def discover_role(group, name):
+    pass # TODO: Receive a one-time object with the player's role and location
+    # The client expects a dictionary with at least the following properties:
+    # {
+    #   location    - (String. Unknown if the player is the spy)
+    #   role        - (String. Equal to "Spy" if the player is the spy)
+    # }
+    # If the player's role has already been discovered, send an error value.
 
 @app.route('/game/<name>')
 def show_game(name):
     global visitors
     visitors.append(name)
-    stream.new_msg("USER UPDATE", 'yay')
-    return render_template('index.html')
+    stream.send_msg("USER UPDATE", 'yay')
+    return render_template('index.html', name=name)
+
 
 app.run(debug = True)
 
