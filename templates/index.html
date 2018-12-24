@@ -34,9 +34,7 @@
                     <button v-on:click="joinGroup">ADD ME</button>
             </div>
 
-
-        
-            <p id="nameView"></p>
+            <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to create game -->
@@ -48,7 +46,7 @@
                 Create game!
             </button><br>
 
-            <p id="createView"></p>
+            <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to view game hub -->

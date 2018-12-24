@@ -5,6 +5,7 @@ var viewer = new Vue({
         group: undefined,
         myName: 'Mr. Spy',
         role: 'Unknown',
+        error: '',
         players: [
             'Bram',
             'Mark',
@@ -35,12 +36,16 @@ var viewer = new Vue({
             this.stream.close();
         },
 
-        joinGroup: function(event){
-            this.frame="gameMenu";
-            this.stream = listentoStream(this.group);
+        joinGroup: function(event){ 
             var self = this;
             getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
                 self.players = data.players;
+                self.error = data.error;
+
+                if (data.successful) {
+                    self.stream = listentoStream(self.group);
+                    self.frame = "gameMenu";
+                }
             });
         },
 
