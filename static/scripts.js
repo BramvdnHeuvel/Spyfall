@@ -5,16 +5,13 @@ function validateInput() {
     name = document.getElementById("name").value;
     groupName = document.getElementById("groupName").value;
 
-    /*  */
     if (name == "" || groupName == "")
         text = "Name or groupname cannot be empty!";
     else
         text = "Hello " + name + "! Your group is: " + groupName;
     document.getElementById("nameView").innerHTML = text;
-}
 
-function cross(name) {
-    var button = document.getElementById("button_{{name}}");
-    
-    button.firstChild.data = "Poffertjes";
+    // let API know you wanna join game
+
+    viewer.updateUsers();
 }

@@ -2,8 +2,8 @@ import threading
 cv = threading.Condition()
 
 class Messenger:
-    message = {"a": "b"}
-    listened = {"a": []}
+    message = {}
+    listened = {}
 
 def __make_setup(channel):
     if channel not in Messenger.message:
@@ -11,7 +11,7 @@ def __make_setup(channel):
     if channel not in Messenger.listened:
         Messenger.listened[channel] = []
 
-def new_msg(message,channel):
+def send_msg(message,channel):
     """
         Send a message to all users that have received a livestream with the "channel" value.  
     """
