@@ -23,7 +23,7 @@ var viewer = new Vue({
             return (this.myName != '' && this.group.length === 6)
         },
         validCreateSyntax: function() {
-            return (this.name != '')
+            return (this.myName != '')
         }
     },
     methods: {
@@ -41,7 +41,7 @@ var viewer = new Vue({
             getData('/api/v1/' + self.group + '/leave/' + self.myName, function(data) {
                 // Leave empty, 'cause nothing useful is returned.
             })
-            this.group = undefined;
+            this.group = '';
             this.frame = 'menuView';
             this.stream.close();
         },

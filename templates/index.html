@@ -44,10 +44,10 @@
             <h1>Spyfall: X-files edition</h1>
             <p>Enter your name:</p>
             <input v-model="myName">
-            <button class="button button-white" v-if="validCreateSyntax" style="color:#b6c9c9">
+            <button class="button button-white" v-if="validCreateSyntax" v-on:click="createGroup">
                 CREATE GAME
             </button>
-            <button class="button button-white" v-else v-on:click="createGroup" >
+            <button class="button button-white" v-else style="color:#b6c9c9">
                 CREATE GAME
             </button><br>
 
