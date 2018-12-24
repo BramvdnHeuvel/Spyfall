@@ -4,11 +4,13 @@ import random
 
 groups = {}
 
+standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa']
+
 class group:
-    def __init__(self, name):
+    def __init__(self, name, locations=standard_locations):
         newplayer = player(name, "none")
         self.players = {name : newplayer}
-        self.locations = []
+        self.locations = locations
         self.started = False
 
 class player:

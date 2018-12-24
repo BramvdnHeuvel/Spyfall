@@ -42,11 +42,6 @@ def get_players(group):
     except KeyError:
         info = {"players" : []}
     return jsonify(info)
-    # TODO: Return a list of players in a given group
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   players - (List of player objects)
-    # }
 
 @app.route('/api/v1/<group>/leave/<name>')
 def leave_group(group, name):
@@ -70,12 +65,6 @@ def creategroup(name):
 def join_group(group, name):
     stream.send_msg("USER UPDATE", group)
     return jsonify(data.joingroup(group, name))
-    # TODO: Join a group if there isn't already an (active) player with that name.
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   successful  - (Bool whether the kick was succesful)
-    #   players     - (List of player objects)
-    # }
 
 @app.route('/api/v1/<group>/myrole/<name>')
 def discover_role(group, name):
