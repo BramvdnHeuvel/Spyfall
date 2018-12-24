@@ -28,9 +28,11 @@ var viewer = new Vue({
     methods: {
         updateUsers: function() {
             var self = this;
-            getData('/api/v1/' + self.group + '/players', function(data) {
-                self.players = data.players;
-            });
+            if (self.group !== '') {
+                getData('/api/v1/' + self.group + '/players', function(data) {
+                    self.players = data.players;
+                });
+            }
         },
 
         leaveGroup: function(event) {
@@ -45,15 +47,22 @@ var viewer = new Vue({
 
         joinGroup: function(event){ 
             var self = this;
-            getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
-                self.players = data.players;
-                self.error = data.error;
 
-                if (data.successful) {
-                    self.stream = listentoStream(self.group);
-                    self.frame = "gameMenu";
-                }
-            });
+            if (self.group === '') {
+                self.error = "Please fill in a group code.";
+            } else if (self.myName === '') {
+                self.error = "Please choose a name.";
+            } else {
+                getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
+                    self.players = data.players;
+                    self.error = data.error;
+    
+                    if (data.successful) {
+                        self.stream = listentoStream(self.group);
+                        self.frame = "gameMenu";
+                    }
+                });
+            }
         },
 
         startGame: function() {
