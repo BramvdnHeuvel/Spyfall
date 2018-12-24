@@ -1,12 +1,12 @@
 from flask import Flask, render_template, Response, jsonify
 from res import stream
+import res.data as data
 
 app = Flask(__name__)
 
 @app.route('/')
 def functie():
-    stream.send_msg('Hey there, kid!','yay')
-    return jsonify()
+    return render_template('index.html')
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
@@ -37,31 +37,42 @@ visitors = []
 
 @app.route('/api/v1/<group>/players')
 def get_players(group):
-    pass # TODO: Return a list of players in a given group
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   players - (List of player objects)
-    # }
+    try:
+        info = {"players" : list(data.groups[group].players.keys())}
+    except KeyError:
+        info = {"players" : []}
+    return jsonify(info)
 
 @app.route('/api/v1/<group>/leave/<name>')
 def leave_group(group, name):
-    pass # TODO: Kick a given player from a given group
+    try:
+        del data.groups[group].players[name]
+        return jsonify({"succesful" : True})
+    except KeyError:
+        return jsonify({"succesful" : False})
+    # TODO: Kick a given player from a given group
     # The client expects a dictionary with at least the following properties:
     # {
     #   successful - (Bool whether the kick was succesful)
     # }
 
+@app.route('/api/v1/creategroup/<name>')
+def creategroup(name):
+    id = data.create_group(name)
+    return jsonify({"succesful" : True, "groupname" : id})
+
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
-    pass # TODO: Join a group if there isn't already an (active) player with that name.
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   successful  - (Bool whether the kick was succesful)
-    #   players     - (List of player objects)
-    # }
+    stream.send_msg("USER UPDATE", group)
+    return jsonify(data.joingroup(group, name))
 
 @app.route('/api/v1/<group>/myrole/<name>')
 def discover_role(group, name):
+    try:
+        info = {"role" : data.groups[group].players[name].role}
+    except KeyError:
+        info = {"role" : None}
+    return jsonify(info)
     pass # TODO: Receive a one-time object with the player's role and location
     # The client expects a dictionary with at least the following properties:
     # {
@@ -72,13 +83,11 @@ def discover_role(group, name):
 
 @app.route('/api/v1/<group>/start')
 def start_game(group):
-    pass # TODO: Create a function that starts the game for all users in that group
-    # Make sure only to start a game if there isn't already a game going on.
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   players     - (List of player objects)
-    #   locations   - (List of location strings)
-    # }
+    data.groups[group].started = True
+    stream.send_msg("GAME STARTED", group)
+
+    return jsonify({"players" : list(data.groups[group].players.keys()), "locations" : data.groups[group].locations})
+
 
 @app.route('/game/<name>')
 def show_game(name):
@@ -89,4 +98,3 @@ def show_game(name):
 
 
 app.run(debug = True)
-
