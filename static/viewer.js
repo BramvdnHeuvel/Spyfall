@@ -3,59 +3,78 @@ var viewer = new Vue({
     data: {
         frame: 'menuView',
         group: undefined,
-        myName: '{{name}}',
+        myName: 'Mr. Spy',
+        role: 'Unknown',
         players: [
-            {name: 'Bram'},
-            {name: 'Sam'},
-            {name: 'Mark'}
-        ]
+            'Bram',
+            'Mark',
+            'Sam'
+        ],
+        locations: [
+            'Airplane',
+            'Bank',
+            'Bram\'s imaginary girlfriend\'s house'
+        ],
+        stream: undefined
     },
     methods: {
         updateUsers: function() {
             var self = this;
             getData('/api/v1/' + self.group + '/players', function(data) {
-                self.players = data.map((user) => ({name: user}));
+                self.players = data.players;
             });
         },
 
         leaveGroup: function(event) {
-            console.log("Leaving group!");
             var self = this;
             getData('/api/v1/' + self.group + '/leave/' + self.myName, function(data) {
                 // Leave empty, 'cause nothing useful is returned.
             })
             this.group = undefined;
             this.frame = 'menuView';
+            this.stream.close();
         },
 
         joinGroup: function(event){
             this.frame="gameMenu";
+            this.stream = listentoStream(this.group);
             var self = this;
             getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
-                console.log(data);
                 self.players = data.players;
             });
         },
 
-        createGame: function(event) {
-            console.log("HELLAOOA");
-            var text, name = document.getElementById("nameCreate").value;
-            console.log(name);
-            if (name === "") {
-                text = "Name field is empty!";
-            } else {
-                fetch('/api/v1/creategroup/' + name)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.successful) {
-                            text = "Your group name is: " + data.groupname;
-                        } else {
-                            text = "Something went work";
-                        }
-                    });
+        startGame: function() {
+            var self = this;
+
+            if (self.frame === 'gameMenu') {
+                self.frame = 'gameView';
+
+                getData('/api/v1/' + self.group + '/start', function(data) {
+                    self.players = data.players;
+                    self.locations = data.locations;
+                });
+
+                getData('/api/v1/' + self.group + '/myrole/' + self.myName, function(data) {
+                    self.role = data.role;
+                })
             }
-        
-            document.getElementById("createView").innerText = text;
+        },
+
+        /* TODO: Refactor */
+        createGroup: function(event) {
+
+            getData('/api/v1/creategroup/' + this.myName, function(data) {
+                if (data.successful) {            
+                    viewer.group = data.groupname
+                    viewer.stream = listentoStream(viewer.group);
+
+                    viewer.frame = "gameMenu"
+                    viewer.updateUsers();
+                } else {
+                    console.log("Something went WORK");
+                }
+            });
         }
     }
 });

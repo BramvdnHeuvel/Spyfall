@@ -71,33 +71,13 @@ def discover_role(group, name):
     except KeyError:
         info = {"role" : None}
     return jsonify(info)
-    pass # TODO: Receive a one-time object with the player's role and location
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   location    - (String. Unknown if the player is the spy)
-    #   role        - (String. Equal to "Spy" if the player is the spy)
-    # }
-    # If the player's role has already been discovered, send an error value.
 
 @app.route('/api/v1/<group>/start')
 def start_game(group):
     data.groups[group].started = True
-    stream.send_msg("GAME STARTED", group)
+    stream.send_msg("GAME START", group)
 
     return jsonify({"players" : list(data.groups[group].players.keys()), "locations" : data.groups[group].locations})
-
-
-@app.route('/game/<name>')
-def show_game(name):
-    global visitors
-    visitors.append(name)
-    stream.send_msg("USER UPDATE", 'yay')
-    return render_template('index.html', name=name)
-
-# TODO: Remove, use Micks
-@app.route('/api/v1/creategroup/<name>')
-def create_game(name):
-    pass
 
 
 app.run(debug = True)
