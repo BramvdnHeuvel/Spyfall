@@ -48,19 +48,16 @@ def get_players(group):
 def leave_group(group, name):
     try:
         del data.groups[group].players[name]
-        return jsonify({"succesful" : True})
     except KeyError:
-        return jsonify({"succesful" : False})
-    # TODO: Kick a given player from a given group
-    # The client expects a dictionary with at least the following properties:
-    # {
-    #   successful - (Bool whether the kick was succesful)
-    # }
+        return jsonify({"successful" : False})
+    else:    
+        stream.send_msg("USER UPDATE", group)
+        return jsonify({"successful" : True})
 
 @app.route('/api/v1/creategroup/<name>')
 def creategroup(name):
     id = data.create_group(name)
-    return jsonify({"succesful" : True, "groupname" : id})
+    return jsonify({"successful" : True, "groupname" : id})
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
