@@ -17,6 +17,13 @@ var viewer = new Vue({
             'Bram\'s imaginary girlfriend\'s house'
         ],
         stream: undefined
+    computed: {
+        validJoinSyntax: function() {
+            return (this.myName != '' && this.group.length === 6)
+        },
+        validCreateSyntax: function() {
+            return (this.name != '')
+        }
     },
     methods: {
         updateUsers: function() {
