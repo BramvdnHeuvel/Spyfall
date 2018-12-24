@@ -2,7 +2,7 @@ var viewer = new Vue({
     el: "#frames",
     data: {
         frame: 'menuView',
-        group: undefined,
+        group: '',
         myName: 'Mr. Spy',
         role: 'Unknown',
         error: '',
@@ -17,6 +17,7 @@ var viewer = new Vue({
             'Bram\'s imaginary girlfriend\'s house'
         ],
         stream: undefined
+    },
     computed: {
         validJoinSyntax: function() {
             return (this.myName != '' && this.group.length === 6)
