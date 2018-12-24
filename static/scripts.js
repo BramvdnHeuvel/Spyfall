@@ -10,17 +10,8 @@ function validateInput() {
     else
         text = "Hello " + name + "! Your group is: " + groupName;
     document.getElementById("nameView").innerHTML = text;
+
+    // let API know you wanna join game
+
+    viewer.updateUsers();
 }
-
-// createGame: function(name) {
-//     var text;
-//     fetch('/api/v1/creategroup/{{name}}')
-//         .then((response) => response.json())
-//         .then((data) => ({
-//             data.groupName;
-//             if (data.success) {
-//                 text = data.groupName;
-//             }
-
-//         }));
-// }

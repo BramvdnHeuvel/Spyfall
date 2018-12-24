@@ -2,8 +2,8 @@ import threading
 cv = threading.Condition()
 
 class Messenger:
-    message = {"a": "b"}
-    listened = {"a": []}
+    message = {}
+    listened = {}
 
 def __make_setup(channel):
     if channel not in Messenger.message:

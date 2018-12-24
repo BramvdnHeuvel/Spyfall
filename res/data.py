@@ -1,22 +1,24 @@
-import sqlite3
-import config
 import random
 
 groups = {}
 
 standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa']
 
-class group:
+class Group:
     def __init__(self, name, locations=standard_locations):
-        newplayer = player(name, "none")
+        newplayer = Player(name)
+
         self.players = {name : newplayer}
         self.locations = locations
         self.started = False
 
-class player:
-    def __init__(self, name, role):
+class Player:
+    def __init__(self, name, role="none"):
         self.name = name
         self.role = role
+    
+    def __repr__(self):
+        return f'<Player {self.name} ({self.role})>'
 
 def generate_random_id(exclude):
     while(True):
@@ -28,27 +30,28 @@ def generate_random_id(exclude):
             else:
                 random_int += 21
             id += str(chr(random_int))
-        if not id in exclude:
+        if not id in groups:
             return id
 
 def create_group(name):
     existing_ids = groups.keys()
     id = generate_random_id(existing_ids)
-    groups[id] = group(name)
+    groups[id] = Group(name)
     return id
 
 def joingroup(group,name):
     information = {"succesful" : False, "players" : []}
 
-    if group in groups.keys():
-        information["succesful"] = True
-        new_player = player(name, "none")
+    if group in groups:
+        new_player = Player(name, "none")
         groups[group].players[name] = new_player
         lijst = list(groups[group].players.keys())
+
+        information["succesful"] = True
         information["players"] = lijst
-        return information
 
     return information
+
 
 
 

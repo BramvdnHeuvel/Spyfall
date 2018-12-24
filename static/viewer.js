@@ -13,35 +13,49 @@ var viewer = new Vue({
     methods: {
         updateUsers: function() {
             var self = this;
-            getData('/api/v1/' + this.group + '/players', function(data) {
+            getData('/api/v1/' + self.group + '/players', function(data) {
                 self.players = data.map((user) => ({name: user}));
             });
         },
 
         leaveGroup: function(event) {
             console.log("Leaving group!");
-            getData('/api/v1/' + this.group + '/leave/' + this.myName, function(data) {
+            var self = this;
+            getData('/api/v1/' + self.group + '/leave/' + self.myName, function(data) {
                 // Leave empty, 'cause nothing useful is returned.
             })
             this.group = undefined;
             this.frame = 'menuView';
         },
 
-        // Used to toggle style on clicked user lists
-        clickUser: function(event) {
-            var button = event.target;
-            var user = this.players.find(x => x.name === button.innerText);
+        joinGroup: function(event){
+            this.frame="gameMenu";
+            var self = this;
+            getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
+                console.log(data);
+                self.players = data.players;
+            });
+        },
 
-            while (button.type != 'submit') {
-                button = button.parentElement;
-            }
-
-            user.crossed = !user.crossed;
-            if (user.crossed) {
-                button.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+        createGame: function(event) {
+            console.log("HELLAOOA");
+            var text, name = document.getElementById("nameCreate").value;
+            console.log(name);
+            if (name === "") {
+                text = "Name field is empty!";
             } else {
-                button.style.backgroundColor = "green";
+                fetch('/api/v1/creategroup/' + name)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.successful) {
+                            text = "Your group name is: " + data.groupname;
+                        } else {
+                            text = "Something went work";
+                        }
+                    });
             }
+        
+            document.getElementById("createView").innerText = text;
         }
     }
 });
