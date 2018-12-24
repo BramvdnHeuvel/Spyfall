@@ -1,5 +1,6 @@
 #mainTitle {
-    font-size: 144px;
+    font-size: 100px;
+    text-shadow: 3px 1px 3px black;
     
     width: 50%;
     margin: auto;
@@ -24,4 +25,16 @@
     margin: 4px 2px;
     cursor: pointer;
     width: 100%;
+}
+
+.button-white {
+    color: black;
+    background-color: transparent;
+    box-shadow: 2px 1px 0px 0px black;
+}
+
+.button-shadow {
+    color:#b6c9c9;
+    background-color: transparent;
+    box-shadow: 2px 1px 0px 0px #b6c9c9;
 }
