@@ -97,5 +97,10 @@ def show_game(name):
     stream.send_msg("USER UPDATE", 'yay')
     return render_template('index.html', name=name)
 
+# TODO: Remove, use Micks
+@app.route('/api/v1/creategroup/<name>')
+def create_game(name):
+    pass
+
 
 app.run(debug = True)

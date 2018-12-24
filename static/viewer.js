@@ -51,6 +51,27 @@ var viewer = new Vue({
             } else {
                 button.style.backgroundColor = "green";
             }
+        },
+
+        createGame: function(event) {
+            console.log("HELLAOOA");
+            var text, name = document.getElementById("nameCreate").value;
+            console.log(name);
+            if (name === "") {
+                text = "Name field is empty!";
+            } else {
+                fetch('/api/v1/creategroup/' + name)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.successful) {
+                            text = "Your group name is: " + data.groupname;
+                        } else {
+                            text = "Something went work";
+                        }
+                    });
+            }
+        
+            document.getElementById("createView").innerText = text;
         }
     }
 });

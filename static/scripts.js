@@ -15,16 +15,3 @@ function validateInput() {
 
     viewer.updateUsers();
 }
-
-// createGame: function(name) {
-//     var text;
-//     fetch('/api/v1/creategroup/{{name}}')
-//         .then((response) => response.json())
-//         .then((data) => ({
-//             data.groupName;
-//             if (data.success) {
-//                 text = data.groupName;
-//             }
-
-//         }));
-// }
