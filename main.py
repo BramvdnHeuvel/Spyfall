@@ -4,27 +4,12 @@ import res.data as data
 
 app = Flask(__name__)
 
-@app.route('/spyfall')
-def functie():
-    return render_template('index.html')
-
-
 @app.route('/stream/<channel>')
 def stream_data(channel):
     return Response(stream.answer(channel), mimetype="text/event-stream")
 
 @app.route('/')
 def main():
-    return render_template('index.html')
-
-@app.route('/welcome')
-def welcome_buddy():
-    names = ["Bram", "Sam", "Sietse", "Mick", "Larissa", "Mark"]
-    locations = ["Supermarkt", "Snackbar", "Het huis van Brams imaginaire vriendin", "Diemen-zuid"]
-    return render_template('spyfall.html', names = names, locations = locations)
-
-@app.route('/index')
-def view_index():
     return render_template('index.html')
 
 
