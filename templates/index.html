@@ -2,10 +2,10 @@
     <title>
         X-Files Spyfall
     </title>
+    <link rel="stylesheet" type="text/css" href="/static/main_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/buttons.css">
+    
     <script src="static/scripts.js"> </script>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main_style.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-    <script src="/static/script.js"></script>
     <script src="/static/tools.js"></script>
 </head>
 <body>
@@ -17,8 +17,8 @@
                     <p>Spyfall</p>
                 </div>
                 <div style="text-align: center">
-                    <button v-on:click="frame = 'createScreen'">START GAME</button>
-                    <button v-on:click="frame = 'joinScreen'">JOIN GAME</button>
+                    <button v-on:click="frame = 'createScreen'" class="button button-white">START GAME</button>
+                    <button v-on:click="frame = 'joinScreen'" class="button button-white">JOIN GAME</button>
                 </div>
             </div>
         </div>
@@ -32,12 +32,11 @@
             <input id="groupName" v-model="group"><br>
             
             <div style="text-align: center">
-                    <button v-on:click="joinGroup">ADD ME</button>
+                <button class="button button-white" v-if="validJoinSyntax" v-on:click="joinGroup">ADD ME</button>
+                <button class="button button-white" v-else style="color:#b6c9c9">ADD ME</button>
             </div>
 
-
-        
-            <p id="nameView"></p>
+            <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to create game -->
@@ -45,11 +44,14 @@
             <h1>Spyfall: X-files edition</h1>
             <p>Enter your name:</p>
             <input v-model="myName">
-            <button v-on:click="createGroup">
-                Create game!
+            <button class="button button-white" v-if="validCreateSyntax" v-on:click="createGroup">
+                CREATE GAME
+            </button>
+            <button class="button button-white" v-else style="color:#b6c9c9">
+                CREATE GAME
             </button><br>
 
-            <p id="createView"></p>
+            <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to view game hub -->
@@ -61,8 +63,8 @@
             ></checkbutton><br>
             
             <div style="text-align: center">
-                    <button v-on:click="leaveGroup">LEAVE GAME</button>
-                    <button v-on:click="startGame">START GAME</button>
+                    <button class="button button-white" v-on:click="leaveGroup">LEAVE GAME</button>
+                    <button class="button button-white" v-on:click="startGame">START GAME</button>
             </div>
         </div>
 
