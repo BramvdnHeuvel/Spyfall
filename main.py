@@ -4,17 +4,18 @@ import res.data as data
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/spyfall')
 def functie():
     return render_template('index.html')
+
 
 @app.route('/stream/<channel>')
 def stream_data(channel):
     return Response(stream.answer(channel), mimetype="text/event-stream")
 
-@app.route('/main')
+@app.route('/')
 def main():
-    return render_template('main.html')
+    return render_template('index.html')
 
 @app.route('/welcome')
 def welcome_buddy():

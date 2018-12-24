@@ -2,6 +2,7 @@
     <title>
         X-Files Spyfall
     </title>
+    <script src="static/scripts.js"> </script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main_style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script src="/static/script.js"></script>
@@ -24,7 +25,19 @@
 
         <!-- Screen for users to join game -->
         <div v-if="frame == 'joinScreen'">
-            <p>Yay! This is the screen to join a game!</p>
+            <h1>SPYFALL</h1>
+            <p>Enter your name:</p>
+            <input id="name" v-model="myName">
+            <p>Enter groupname:</p>
+            <input id="groupName" v-model="group"><br>
+            
+            <div style="text-align: center">
+                    <button v-on:click="joinGroup">ADD ME</button>
+            </div>
+
+
+        
+            <p id="nameView"></p>
         </div>
 
         <!-- Screen for users to create game -->
@@ -47,9 +60,10 @@
                 v-for="player in players"
                 v-bind:title="player"
             ></checkbutton><br>
+            
             <div style="text-align: center">
-                <button v-on:click="leaveGroup">LEAVE GROUP</button>
-                <button v-on:click="frame = 'joinScreen'">START GAME</button>
+                    <button v-on:click="frame = 'menuView'">LEAVE GAME</button>
+                    <button v-on:click="frame = 'gameView'">START GAME</button>
             </div>
         </div>
 
