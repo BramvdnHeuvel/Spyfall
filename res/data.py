@@ -2,7 +2,7 @@ import random
 
 groups = {}
 
-standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa']
+standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa', 'Embassy']
 
 class Group:
     def __init__(self, name, locations=standard_locations):

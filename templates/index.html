@@ -24,27 +24,25 @@
         </div>
 
         <!-- Screen for users to join game -->
-        <div v-if="frame == 'joinScreen'">
-            <div style="text-align: center;margin:5px;">
-                <h1>SPYFALL</h1>
+        <div id="central" v-if="frame == 'joinScreen'">
+            <h1>SPYFALL</h1>
 
-                <p>Enter your name:</p>
-                <input v-model="myName">
+            <p>Enter your name:</p>
+            <input v-model="myName">
 
-                <p>Enter groupname:</p>
-                <input v-model="group"><br>
-                
-                <div style="margin:10px">
-                    <button class="button button-white" v-if="validJoinSyntax" v-on:click="joinGroup">ADD ME</button>
-                    <button class="button button-shadow" v-else >ADD ME</button>
-                </div>
+            <p>Enter groupname:</p>
+            <input v-model="group"><br>
+            
+            <div style="margin:10px">
+                <button class="button button-white" v-if="validJoinSyntax" v-on:click="joinGroup">ADD ME</button>
+                <button class="button button-shadow" v-else >ADD ME</button>
             </div>
 
             <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to create game -->
-        <div v-if="frame == 'createScreen'">
+        <div id="central" v-if="frame == 'createScreen'">
             <h1>Spyfall: X-files edition</h1>
 
             <p>Enter your name:</p>
@@ -57,7 +55,7 @@
         </div>
 
         <!-- Screen for users to view game hub -->
-        <div v-if="frame == 'gameMenu'">
+        <div id="central" v-if="frame == 'gameMenu'">
             <h1>Group code: {% raw %}{{ group }}{% endraw %}</h1>
             <checkbutton
                 v-for="player in players"

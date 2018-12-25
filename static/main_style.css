@@ -24,7 +24,7 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    width: 100%;
+    width: 45%;
 }
 
 .button-white {
@@ -37,4 +37,10 @@
     color:#b6c9c9;
     background-color: transparent;
     box-shadow: 2px 1px 0px 0px #b6c9c9;
+}
+
+#central {
+    text-align: center;
+    width: 60%;
+    margin: auto;
 }
