@@ -39,8 +39,23 @@
     box-shadow: 2px 1px 0px 0px #b6c9c9;
 }
 
-#central {
+.central {
     text-align: center;
     width: 60%;
     margin: auto;
+}
+
+.selection-box {
+    overflow:hidden;
+    width:200px;
+    margin:auto;
+}
+
+.location-box {
+    width:149px;
+    margin-top:7px;
+    margin-bottom:7px;
+
+    float:left;
+    text-align:left;
 }

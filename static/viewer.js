@@ -14,7 +14,11 @@ var viewer = new Vue({
         locations: [
             'Airplane',
             'Bank',
-            'Bram\'s imaginary girlfriend\'s house'
+            'Bram\'s imaginary girlfriend\'s house',
+            'Crusader Army',
+            'Day Spa',
+            'Embassy',
+            'Hospital'
         ],
         stream: undefined
     },
