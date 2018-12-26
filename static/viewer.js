@@ -2,9 +2,10 @@ var viewer = new Vue({
     el: "#frames",
     data: {
         frame: 'menuView',
-        group: undefined,
+        group: '',
         myName: 'Mr. Spy',
         role: 'Unknown',
+        error: '',
         players: [
             'Bram',
             'Mark',
@@ -13,16 +14,30 @@ var viewer = new Vue({
         locations: [
             'Airplane',
             'Bank',
-            'Bram\'s imaginary girlfriend\'s house'
+            'Bram\'s imaginary girlfriend\'s house',
+            'Crusader Army',
+            'Day Spa',
+            'Embassy',
+            'Hospital'
         ],
         stream: undefined
+    },
+    computed: {
+        validJoinSyntax: function() {
+            return (this.myName != '' && this.group.length === 6)
+        },
+        validCreateSyntax: function() {
+            return (this.myName != '')
+        }
     },
     methods: {
         updateUsers: function() {
             var self = this;
-            getData('/api/v1/' + self.group + '/players', function(data) {
-                self.players = data.players;
-            });
+            if (self.group !== '') {
+                getData('/api/v1/' + self.group + '/players', function(data) {
+                    self.players = data.players;
+                });
+            }
         },
 
         leaveGroup: function(event) {
@@ -30,18 +45,29 @@ var viewer = new Vue({
             getData('/api/v1/' + self.group + '/leave/' + self.myName, function(data) {
                 // Leave empty, 'cause nothing useful is returned.
             })
-            this.group = undefined;
+            this.group = '';
             this.frame = 'menuView';
             this.stream.close();
         },
 
-        joinGroup: function(event){
-            this.frame="gameMenu";
-            this.stream = listentoStream(this.group);
+        joinGroup: function(event){ 
             var self = this;
-            getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
-                self.players = data.players;
-            });
+
+            if (self.group === '') {
+                self.error = "Please fill in a group code.";
+            } else if (self.myName === '') {
+                self.error = "Please choose a name.";
+            } else {
+                getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
+                    self.players = data.players;
+                    self.error = data.error;
+    
+                    if (data.successful) {
+                        self.stream = listentoStream(self.group);
+                        self.frame = "gameMenu";
+                    }
+                });
+            }
         },
 
         startGame: function() {

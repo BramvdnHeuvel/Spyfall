@@ -47,8 +47,10 @@ def creategroup(name):
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
-    stream.send_msg("USER UPDATE", group)
-    return jsonify(data.joingroup(group, name))
+    response = data.joingroup(group, name)
+    if response["successful"]:
+        stream.send_msg("USER UPDATE", group)
+    return jsonify(response)
 
 @app.route('/api/v1/<group>/myrole/<name>')
 def discover_role(group, name):

@@ -15,6 +15,12 @@ function listentoStream(group) {
             viewer.startGame();
         }
     }
+    source.onerror = function(event) {
+        console.log("Seems like I got an error! Oh no!");
+        this.close();
+        console.log("Opening new stream...");
+        source = listentoStream(group);
+    }
 
     console.log("EventSource initiated for group " + group + ".");
     return source;

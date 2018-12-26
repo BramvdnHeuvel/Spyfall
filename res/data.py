@@ -2,7 +2,7 @@ import random
 
 groups = {}
 
-standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa']
+standard_locations = ['Airplane', 'Bank', 'Beach', 'Circus Tent', 'Crusader Army', 'Day Spa', 'Embassy']
 
 class Group:
     def __init__(self, name, locations=standard_locations):
@@ -40,15 +40,22 @@ def create_group(name):
     return id
 
 def joingroup(group,name):
-    information = {"successful" : False, "players" : []}
+    information = {"successful" : False, "players" : [], "error" : ""}
 
     if group in groups:
-        new_player = Player(name, "none")
-        groups[group].players[name] = new_player
-        lijst = list(groups[group].players.keys())
+        if name in groups[group].players:
+            information["error"] = "Name already occupied."
 
-        information["successful"] = True
-        information["players"] = lijst
+        else:
+            new_player = Player(name, "none")
+            groups[group].players[name] = new_player
+            lijst = list(groups[group].players.keys())
+
+            information["successful"] = True
+            information["players"] = lijst
+    
+    else:
+        information["error"] = "Unknown group."
 
     return information
 
