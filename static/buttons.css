@@ -59,8 +59,3 @@ body {
   .button:active:before {
     content: none;
   }
-
-  .button-white {
-    color: black;
-    background-color: transparent;
-  }

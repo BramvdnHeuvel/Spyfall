@@ -2,8 +2,8 @@
     <title>
         X-Files Spyfall
     </title>
-    <link rel="stylesheet" type="text/css" href="/static/main_style.css">
     <link rel="stylesheet" type="text/css" href="/static/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/static/main_style.css">
     
     <script src="static/scripts.js"> </script>
     <script src="/static/tools.js"></script>
@@ -24,38 +24,38 @@
         </div>
 
         <!-- Screen for users to join game -->
-        <div v-if="frame == 'joinScreen'">
+        <div class="central" v-if="frame == 'joinScreen'">
             <h1>SPYFALL</h1>
+
             <p>Enter your name:</p>
-            <input id="name" v-model="myName">
+            <input v-model="myName">
+
             <p>Enter groupname:</p>
-            <input id="groupName" v-model="group"><br>
+            <input v-model="group"><br>
             
-            <div style="text-align: center">
+            <div style="margin:10px">
                 <button class="button button-white" v-if="validJoinSyntax" v-on:click="joinGroup">ADD ME</button>
-                <button class="button button-white" v-else style="color:#b6c9c9">ADD ME</button>
+                <button class="button button-shadow" v-else >ADD ME</button>
             </div>
 
             <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to create game -->
-        <div v-if="frame == 'createScreen'">
+        <div class="central" v-if="frame == 'createScreen'">
             <h1>Spyfall: X-files edition</h1>
+
             <p>Enter your name:</p>
-            <input v-model="myName">
-            <button class="button button-white" v-if="validCreateSyntax" v-on:click="createGroup">
-                CREATE GAME
-            </button>
-            <button class="button button-white" v-else style="color:#b6c9c9">
-                CREATE GAME
-            </button><br>
+            <input v-model="myName" style="font-size: 26">
+            <button class="button button-white" v-if="validCreateSyntax" v-on:click="createGroup">CREATE GAME</button>
+            <button class="button button-shadow" v-else>CREATE GAME</button>
+            <br>
 
             <p style="color:red;">{% raw %}{{ error }}{% endraw %}</p>
         </div>
 
         <!-- Screen for users to view game hub -->
-        <div v-if="frame == 'gameMenu'">
+        <div class="central" v-if="frame == 'gameMenu'">
             <h1>Group code: {% raw %}{{ group }}{% endraw %}</h1>
             <checkbutton
                 v-for="player in players"
@@ -65,6 +65,13 @@
             <div style="text-align: center">
                     <button class="button button-white" v-on:click="leaveGroup">LEAVE GAME</button>
                     <button class="button button-white" v-on:click="startGame">START GAME</button>
+            </div>
+
+            <div v-if="admin" class="central" style="margin-top: 20px;">
+                <potentialplace
+                    v-for="location in locations"
+                    v-bind:place="location"
+                ></potentialplace>
             </div>
         </div>
 
@@ -103,7 +110,30 @@
                     v-else style="background-color:green;">
                         {% raw %}{{ title }}{% endraw %}
                 </button>`
-        })
+        });
+        Vue.component('potentialplace', {
+            props: ['place'],
+            data: function() {
+                return {
+                    visible: true
+                }
+            },
+            methods: {
+                deleteLocation: function(event) {
+                    console.log(this.place);
+                    this.visible = false;
+
+                    getData('/api/v1/' + viewer.group + '/del_loc/' + this.place, function(data) {
+                        // leave empty if only useless data is sent
+                    });
+                }
+            },
+            template: `
+                <div class="selection-box" v-if="visible">
+                    <div class="location-box">{% raw %}{{ place }}{% endraw %}</div>
+                    <button style="float:right;" class="button button-white" v-on:click="deleteLocation">X</button>
+                </div>`
+        });
     </script>
     {% block startpoint %}
         <script>
