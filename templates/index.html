@@ -96,6 +96,7 @@
     <script src="/static/components.js"></script>
     {% block startpoint %}
         <script>
+            viewer.myName = "{{ name }}"
             viewer.updateUsers();
         </script>
     {% endblock startpoint %}
