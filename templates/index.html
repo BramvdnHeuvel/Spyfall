@@ -6,13 +6,13 @@
     <link rel="stylesheet" type="text/css" href="/static/main_style.css">
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-    <script src="static/scripts.js"> </script>
+    <script src="/static/scripts.js"> </script>
     <script src="/static/tools.js"></script>
 </head>
 <body>
     <div id="frames">
         <!-- Main Menu -->
-        <div v-if="frame == 'menuView'">
+        <div class="central" v-if="frame == 'menuView'">
             <div id="mainTitle">
                 <div id="title">
                     <p>Spyfall</p>
@@ -44,7 +44,7 @@
 
         <!-- Screen for users to create game -->
         <div class="central" v-if="frame == 'createScreen'">
-            <h1>Spyfall: X-files edition</h1>
+            <h1 style="margin-top: 50px;">Spyfall: X-files edition</h1>
 
             <p>Enter your name:</p>
             <input v-model="myName" style="font-size: 26">
@@ -57,7 +57,7 @@
 
         <!-- Screen for users to view game hub -->
         <div class="central" v-if="frame == 'gameMenu'">
-            <h1>Group code: {% raw %}{{ group }}{% endraw %}</h1>
+            <h1 style="margin-top: 50px;">Group code: {% raw %}{{ group }}{% endraw %}</h1>
             <checkbutton
                 v-for="player in players"
                 v-bind:title="player"
@@ -132,7 +132,11 @@
             template: `
                 <div class="selection-box" v-if="visible">
                     <div class="location-box">{% raw %}{{ place }}{% endraw %}</div>
-                    <button style="float:right;" class="button button-white" v-on:click="deleteLocation">X</button>
+                    <button
+                        style="float:right;border-radius:13px;width:93px;margin-right:5px;"
+                        class="button button-white"
+                        v-on:click="deleteLocation"
+                    >X</button>
                 </div>`
         });
     </script>
