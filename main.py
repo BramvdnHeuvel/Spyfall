@@ -14,6 +14,10 @@ def stream_data(channel):
 def main():
     return render_template('index.html', name=names.random_name())
 
+@app.route('/<group>')
+def start_in_group(group):
+    return render_template('group.html', group=group, name=names.random_name())
+
 
 # -----------------------------------------------------
 # -----------------------------------------------------
