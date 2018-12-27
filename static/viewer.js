@@ -6,6 +6,7 @@ var viewer = new Vue({
         myName: 'Mr. Spy',
         role: 'Unknown',
         error: '',
+        admin: true,
         players: [
             'Bram',
             'Mark',
