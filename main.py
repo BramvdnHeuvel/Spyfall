@@ -47,8 +47,7 @@ def leave_group(group, name):
 
 @app.route('/api/v1/creategroup/<name>')
 def creategroup(name):
-    id = data.create_group(name)
-    return jsonify({"successful" : True, "groupname" : id})
+    return jsonify(data.create_group(name))
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
@@ -57,13 +56,19 @@ def join_group(group, name):
         stream.send_msg("USER UPDATE", group)
     return jsonify(response)
 
-@app.route('/api/v1/<group>/myrole/<name>')
-def discover_role(group, name):
+@app.route('/api/v1/<group>/myrole/<name>/<secretid>')
+def discover_role(group, name, secretid):
+    info = {"role": None}
     try:
-        info = {"role" : data.groups[group].players[name].role}
+        player = data.groups[group].players[name]
     except KeyError:
-        info = {"role" : None}
+        pass
+    else:
+        if secretid == player.id:
+            info = {"role" : player.role}
+            
     return jsonify(info)
+
 
 @app.route('/api/v1/<group>/start')
 def start_game(group):
