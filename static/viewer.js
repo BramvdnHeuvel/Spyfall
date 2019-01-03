@@ -6,6 +6,7 @@ var viewer = new Vue({
         myName: 'Mr. Spy',
         role: 'Unknown',
         error: '',
+        secretId: '',
         admin: true,
         players: [
             'Bram',
@@ -62,6 +63,7 @@ var viewer = new Vue({
                 getData('/api/v1/' + self.group + '/join/' + self.myName, function(data) {
                     self.players = data.players;
                     self.error = data.error;
+                    self.secretId = data.id;
     
                     if (data.successful) {
                         self.stream = listentoStream(self.group);
@@ -82,9 +84,13 @@ var viewer = new Vue({
                     self.locations = data.locations;
                 });
 
-                getData('/api/v1/' + self.group + '/myrole/' + self.myName, function(data) {
-                    self.role = data.role;
-                })
+                getData('/api/v1/' + self.group + '/myrole/' + self.myName + '/' + self.secretId, function(data) {
+                    if (self.role != null) {
+                        self.role = data.role;
+                    } else {
+                        console.log("Could not retrieve user's role.");
+                    }
+                });
             }
         },
 
@@ -92,8 +98,9 @@ var viewer = new Vue({
         createGroup: function(event) {
 
             getData('/api/v1/creategroup/' + this.myName, function(data) {
-                if (data.successful) {            
-                    viewer.group = data.groupname
+                if (data.successful) {
+                    viewer.group = data.group;
+                    viewer.secretId = data.secretId;
                     viewer.stream = listentoStream(viewer.group);
 
                     viewer.frame = "gameMenu"

@@ -78,14 +78,18 @@
         </div>
 
         <!-- View during a game -->
-        <div v-if="frame == 'gameView'">
+        <div class="central" v-if="frame == 'gameView'">
             <p>Yay! A Game has started!</p>
-            <h1>Players</h1>
+            
+            <h3 v-if="role==='Spy'">You are the Spy!</h3>
+            <h3 v-else>Location: {% raw %}{{ role }}{% endraw %}</h3>
+
+            <h2>Players</h1>
             <checkbutton
                 v-for="player in players"
                 v-bind:title="player"
             ></checkbutton><br>
-            <h1>Locations</h1>
+            <h2>Locations</h1>
             <checkbutton
                 v-for="location in locations"
                 v-bind:title="location"

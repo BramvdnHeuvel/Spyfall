@@ -17,9 +17,9 @@ names = [
         'Innocent',
         'Dr. Who(?)',
         'Sherlock',
-        "Agent Double O'Seven",
+        "Agent Double O-Seven",
         'Yo Momma',
         
-        "Adrian o'Cola",
+        "Adrian oCola",
         "A crab with a hat"
     ]
