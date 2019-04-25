@@ -11,6 +11,10 @@ class Group:
         self.players = {name : newplayer}
         self.locations = locations
         self.started = False
+
+        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/DHsOCaA")
+            print("Adding special location!")
     
     def __used_ids(self):
         print('Hela hela ho lala')
@@ -20,6 +24,12 @@ class Group:
     def add_player(self, name, role="none"):
         new_player = Player(name, self.ids, role)
         self.players[name] = new_player
+
+        print("Adding player!")
+        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/DHsOCaA")
+            print("Adding special location!")
+
         return new_player
 
 
