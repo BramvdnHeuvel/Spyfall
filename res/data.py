@@ -12,8 +12,8 @@ class Group:
         self.locations = locations
         self.started = False
 
-        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
-            self.locations.append("https://imgur.com/DHsOCaA")
+        if "https://imgur.com/x0DkNO7" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/x0DkNO7")
             print("Adding special location!")
     
     def __used_ids(self):
