@@ -12,10 +12,32 @@ class Group:
         self.locations = locations
         self.started = False
 
+        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/DHsOCaA")
+            print("Adding special location!")
+    
+    def __used_ids(self):
+        print('Hela hela ho lala')
+        return [player.id for player in self.players.values()]
+    ids = property(__used_ids)
+
+    def add_player(self, name, role="none"):
+        new_player = Player(name, self.ids, role)
+        self.players[name] = new_player
+
+        print("Adding player!")
+        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/DHsOCaA")
+            print("Adding special location!")
+
+        return new_player
+
+
 class Player:
-    def __init__(self, name, role="none"):
+    def __init__(self, name, exclude_id=[], role="none"):
         self.name = name
         self.role = role
+        self.id = generate_random_id(exclude_id)
     
     def __repr__(self):
         return f'<Player {self.name} ({self.role})>'
@@ -30,29 +52,32 @@ def generate_random_id(exclude):
             else:
                 random_int += 21
             id += str(chr(random_int))
-        if not id in groups:
+        if not id in exclude:
             return id
 
 def create_group(name):
     existing_ids = groups.keys()
     id = generate_random_id(existing_ids)
     groups[id] = Group(name)
-    return id
 
-def joingroup(group,name):
-    information = {"successful" : False, "players" : [], "error" : ""}
+    return {"successful": True, "group": id, "secretId": groups[id].players[name].id}
 
-    if group in groups:
-        if name in groups[group].players:
+def joingroup(group_id,name):
+    information = {"successful" : False, "players" : [], "error" : "", "id": ""}
+
+    if group_id in groups:
+        group = groups[group_id]
+
+        if name in group.players:
             information["error"] = "Name already occupied."
 
         else:
-            new_player = Player(name, "none")
-            groups[group].players[name] = new_player
-            lijst = list(groups[group].players.keys())
+            new_player = group.add_player(name)
+            lijst = list(group.players.keys())
 
             information["successful"] = True
             information["players"] = lijst
+            information["id"] = new_player.id
     
     else:
         information["error"] = "Unknown group."

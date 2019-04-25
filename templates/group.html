@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block startpoint %}
+<script>
+    viewer.frame = "joinScreen";
+    viewer.group = "{{ group }}"
+    viewer.joinGroup();
+</script>
+{% endblock %}

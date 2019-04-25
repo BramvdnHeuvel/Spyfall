@@ -5,14 +5,15 @@
     <link rel="stylesheet" type="text/css" href="/static/buttons.css">
     <link rel="stylesheet" type="text/css" href="/static/main_style.css">
     
+    <script src="/static/vue_offline.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-    <script src="static/scripts.js"> </script>
+    <script src="/static/scripts.js"> </script>
     <script src="/static/tools.js"></script>
 </head>
 <body>
     <div id="frames">
         <!-- Main Menu -->
-        <div v-if="frame == 'menuView'">
+        <div class="central" v-if="frame == 'menuView'">
             <div id="mainTitle">
                 <div id="title">
                     <p>Spyfall</p>
@@ -44,7 +45,7 @@
 
         <!-- Screen for users to create game -->
         <div class="central" v-if="frame == 'createScreen'">
-            <h1>Spyfall: X-files edition</h1>
+            <h1 style="margin-top: 50px;">Spyfall: X-files edition</h1>
 
             <p>Enter your name:</p>
             <input v-model="myName" style="font-size: 26">
@@ -57,7 +58,7 @@
 
         <!-- Screen for users to view game hub -->
         <div class="central" v-if="frame == 'gameMenu'">
-            <h1>Group code: {% raw %}{{ group }}{% endraw %}</h1>
+            <h1 style="margin-top: 50px;">Group code: {% raw %}{{ group }}{% endraw %}</h1>
             <checkbutton
                 v-for="player in players"
                 v-bind:title="player"
@@ -77,14 +78,18 @@
         </div>
 
         <!-- View during a game -->
-        <div v-if="frame == 'gameView'">
+        <div class="central" v-if="frame == 'gameView'">
             <p>Yay! A Game has started!</p>
-            <h1>Players</h1>
+            
+            <h3 v-if="role==='Spy'">You are the Spy!</h3>
+            <h3 v-else>Location: {% raw %}{{ role }}{% endraw %}</h3>
+
+            <h2>Players</h1>
             <checkbutton
                 v-for="player in players"
                 v-bind:title="player"
             ></checkbutton><br>
-            <h1>Locations</h1>
+            <h2>Locations</h1>
             <checkbutton
                 v-for="location in locations"
                 v-bind:title="location"
@@ -92,52 +97,11 @@
         </div>
     </div>
     <script src="/static/viewer.js"></script>
-    <script>
-        Vue.component('checkbutton', {
-            props: ['title'],
-            data: function() {
-                return {
-                    crossed: false
-                }
-            },
-            template: `
-                <button id='node_button'
-                    v-on:click='crossed=!(crossed)'
-                    v-if="crossed" style="background-color:rgba(255, 0, 0, 0.3);">
-                        {% raw %}<del>{{ title }}</del>{% endraw %}
-                </button>
-                <button id='node_button'
-                    v-on:click='crossed=!(crossed)'
-                    v-else style="background-color:green;">
-                        {% raw %}{{ title }}{% endraw %}
-                </button>`
-        });
-        Vue.component('potentialplace', {
-            props: ['place'],
-            data: function() {
-                return {
-                    visible: true
-                }
-            },
-            methods: {
-                deleteLocation: function(event) {
-                    console.log(this.place);
-                    this.visible = false;
-
-                    getData('/api/v1/' + viewer.group + '/del_loc/' + this.place, function(data) {
-                        // leave empty if only useless data is sent
-                    });
-                }
-            },
-            template: `
-                <div class="selection-box" v-if="visible">
-                    <div class="location-box">{% raw %}{{ place }}{% endraw %}</div>
-                    <button style="float:right;" class="button button-white" v-on:click="deleteLocation">X</button>
-                </div>`
-        });
-    </script>
+    <script src="/static/components.js"></script>
+    <!-- Bit = 4.628 -->
     {% block startpoint %}
         <script>
+            viewer.myName = "{{ name }}"
             viewer.updateUsers();
         </script>
     {% endblock startpoint %}
