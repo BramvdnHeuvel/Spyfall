@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 import res.data as data
 import os
@@ -51,6 +51,8 @@ def creategroup(name):
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
+    if group == 'DEMABE':
+        return jsonify({"successful" : True, "players" : ['Dennis', 'Marco', 'Be...?','Location'], "error" : "", "id": "DEMABE"})
     response = data.joingroup(group, name)
     if response["successful"]:
         stream.send_msg("USER UPDATE", group)
