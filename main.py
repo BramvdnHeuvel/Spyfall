@@ -4,6 +4,8 @@ import res.data as data
 import os
 import sys
 
+import random
+
 app = Flask(__name__)
 
 @app.route('/stream/<channel>')
@@ -51,8 +53,6 @@ def creategroup(name):
 
 @app.route('/api/v1/<group>/join/<name>')
 def join_group(group, name):
-    if group == 'DEMABE':
-        return jsonify({"successful" : True, "players" : ['Dennis', 'Marco', 'Be...?','Location'], "error" : "", "id": "DEMABE"})
     response = data.joingroup(group, name)
     if response["successful"]:
         stream.send_msg("USER UPDATE", group)
@@ -78,6 +78,58 @@ def start_game(group):
     stream.send_msg("GAME START", group)
 
     return jsonify({"players" : list(data.groups[group].players.keys()), "locations" : data.groups[group].locations})
+
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -------------------   BIT   -------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+@app.route('/destination')
+def location_generator():
+    locations = [
+        'Elysium', 'Elysium', 'Elysium', 'Elysium', 'Elysium', 'Hell', 'Startup Village', 'Science Park',
+        'Unilever', 'Bit', 'America', 'Africa', 'Europe', 'Asia', 'Antarctica', 'the moon', 'poop in an old shoe',
+        'stay home', 'another country', 'Amsterdam', 'Amersfoort, the most beautiful city around', 'Almere',
+        'Friesland', 'Drente', 'Oudega', 'Marco\'s house', 'rob the bank', 'visit Granny', 'raid Stijn\'s house',
+        'the movie', 'some random hostel in Amstelveen', 'Rotterdam', 'Australia', 'die'
+    ]
+    random_location = locations[random.randint(0, len(locations)-1)]
+
+    return render_template('location.html', location=random_location)
+
+@app.route('/facts/false')
+def hidden_fact_false():
+    return '<p style="text-align:center">Vincent knows what the location is - but pretends he doesn\'t. He will give you a hint if you Slack him a banana GIF.</p>'
+
+@app.route('/facts/true')
+def hidden_fact_true():
+    return '<p style="text-align:center">Somewhere in the office, a hint has been hidden. Ironically, you will find it if you manage to fulfill the DeMa goals.</p>'
+
+@app.route('/storytime')
+def story_time():
+    return render_template('storytime.html')
+
+@app.route('/api/v1/bit/story/check1/<answer_1>/<answer_2>/<answer_3>')
+def story_first_check(answer_1, answer_2, answer_3):
+    answer = (answer_1.lower() == 'elon musk' and answer_2.lower() == 'deer' and answer_3.lower() == 'errvelousast')
+    return jsonify({"answer": answer})
+
+@app.route('/api/v1/bit/story/check2/<answer_1>/<answer_2>/<answer_3>/<answer_4>/<answer_5>')
+def story_second_check(answer_1, answer_2, answer_3, answer_4, answer_5):
+    response = {"solution": ""}
+
+    if answer_1.lower() == "elon musk" and answer_2.lower() == "deer" and answer_3.lower() == "errvelousast":
+        if answer_4.lower() == "elysium" and answer_5.lower() == "mom\'s mayo":
+            response = {"solution": "/what-the-sisters-looked-like"}
+    
+    return jsonify(response)
+
+@app.route('/what-the-sisters-looked-like')
+def evil_sister_image():
+    return render_template('sisters.html')
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

@@ -1,0 +1,100 @@
+<head>
+    <title>
+        X-Files Spyfall
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/static/main_style.css">
+    
+    <script src="/static/vue_offline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="/static/scripts.js"> </script>
+    <script src="/static/tools.js"></script>
+</head>
+<body>
+    <div id="checker">
+        <p>
+            Once upon a time, there was a great overlord. Their name was 
+            <input v-model="answer_1">
+            . They found a certain animal quite gorgeous. It was known as a
+            <input v-model="answer_2">
+            to humans.
+        </p>
+        <p>
+            Being such a great entity, the overlord attempted to create a god that would
+            honour its favourite entity for good.
+        </p>
+        <p>
+            Unfortunately, the overlord forgot to finish their spell with the magic word <b>DEMABE</b>,
+            and instead created an incredibly evil entity known as the
+            <input v-model="answer_3">.
+        </p>
+        <button v-if="!stage_two" class="button button-white" v-on:click="stageCheck">CHECK ANSWER</button>
+        <div v-if="stage_two">
+            <p>
+                This evil entity traveled to
+                <input v-model="answer_4">
+                , where the three holy sisters lived. 
+                Those sisters tried to keep as many sources of fat away from them
+                as they could, though they did have one guilty pleasure.
+                It was the one unhealthy food they couldn't keep their fingers off;
+                it was their favourite
+                <input v-model="answer_5">
+                !
+            </p>
+            <p>
+                The evil entity fulfilled its first evil deed by destroying the three sisters'
+                favourite food. This is why they ended up looking like they did.
+            </p>
+            <button class="button button-white" v-on:click="finalCheck">CHECK ANSWER</button>
+        </div>
+        <h1>{% raw %}{{ solution }}{% endraw %}</h1>
+    </div>
+    <script>
+        var revealer = new Vue({
+            el: '#checker',
+            data: {
+                stage_two: false,
+
+                answer_1: "",
+                answer_2: "",
+                answer_3: "",
+                answer_4: "",
+                answer_5: "",
+
+                solution: ""
+            },
+            methods: {
+                stageCheck: function() {
+                    var self = this;
+
+                    opt1 = self.answer_1 != "" ? self.answer_1 : "NOPE";
+                    opt2 = self.answer_2 != "" ? self.answer_2 : "NOPE";
+                    opt3 = self.answer_3 != "" ? self.answer_3 : "NOPE";
+
+
+                    getData('/api/v1/bit/story/check1/' + opt1 + '/' + opt2 + '/' + opt3, function(data) {
+                        self.stage_two = data.answer;
+                        console.log(self.stage_two);
+                    });
+                },
+
+                finalCheck: function() {
+                    var self = this;
+
+                    opt1 = self.answer_1 != "" ? self.answer_1 : "NOPE";
+                    opt2 = self.answer_2 != "" ? self.answer_2 : "NOPE";
+                    opt3 = self.answer_3 != "" ? self.answer_3 : "NOPE";
+                    opt4 = self.answer_4 != "" ? self.answer_4 : "NOPE";
+                    opt5 = self.answer_5 != "" ? self.answer_5 : "NOPE";
+
+                    getData(
+                        '/api/v1/bit/story/check2/' + opt1 + '/' + opt2 + '/' + opt3 + '/' + opt4 + '/' + opt5, 
+                        function(data) {
+                            self.solution = data.solution;
+                        }
+                    );
+                }
+            }
+        });
+    </script>
+</body>
