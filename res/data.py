@@ -26,10 +26,10 @@ class Group:
     def add_player(self, name, role="none"):
         new_player = Player(name, self.ids, role)
         self.players[name] = new_player
-
-        print("Adding player!")
-        if "https://imgur.com/DHsOCaA" not in self.locations and "Elon Musk" in self.players:
-            self.locations.append("https://imgur.com/DHsOCaA")
+        
+        if "https://imgur.com/x0DkNO7" not in self.locations and "Elon Musk" in self.players:
+            self.locations.append("https://imgur.com/x0DkNO7")
+            print("Adding special location!")
 
         if "Beatrix" in self.players and "Becca" in self.players and "Bella" in self.players:
             if "YO MOMMA's FAT" not in self.locations:
@@ -70,9 +70,9 @@ def create_group(name):
 def joingroup(group_id,name):
     information = {"successful" : False, "players" : [], "error" : "", "id": ""}
 
-    if group_id == 'EBAMED':
-        if 'EBAMED' not in groups:
-            groups['EBAMED'] = Group('Elon Musk')
+    if group_id == 'DEMABE':
+        if 'DEMABE' not in groups:
+            groups['DEMABE'] = Group('Elon Musk')
 
         req = dt.datetime(2019, 6, 4, 19, 0, 0, 0)
         now = dt.datetime.now()
@@ -84,7 +84,7 @@ def joingroup(group_id,name):
         else:
             timedelta = 'PDF'
 
-        groups['EBAMED'].locations = ['Beatrix', '/destination', 'Bella', str(timedelta), '2ZKB7fV', 'uggcf://fclsny.urebxhncc.pbz/fgbelgvzr', 'Becca', '(52.35433, 4.95876)']
+        groups['DEMABE'].locations = ['Beatrix', '/destination', 'Bella', str(timedelta), '2ZKB7fV', 'uggcf://fclsny.urebxhncc.pbz/fgbelgvzr', 'Becca', '(52.35433, 4.95876)']
 
     if group_id in groups:
         group = groups[group_id]
