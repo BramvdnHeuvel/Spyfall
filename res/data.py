@@ -74,7 +74,7 @@ def joingroup(group_id,name):
         if 'DEMABE' not in groups:
             groups['DEMABE'] = Group('Elon Musk')
 
-        req = dt.datetime(2019, 6, 4, 19, 0, 0, 0)
+        req = dt.datetime(2019, 6, 3, 17, 40, 0, 0)
         now = dt.datetime.now()
         timedelta = req - now
         timedelta = timedelta.days * 24 * 3600 + timedelta.seconds
