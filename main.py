@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 import res.data as data
+import res.keuzes as keuzes
 import os
 import sys
 
@@ -130,6 +131,14 @@ def story_second_check(answer_1, answer_2, answer_3, answer_4, answer_5):
 def evil_sister_image():
     return render_template('sisters.html')
 
+
+@app.route('/counter/reset')
+def create_database():
+    keuzes.init_database()
+
+@app.route('/counter/add')
+def get_counter():
+    return str(keuzes.get_counter())
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
