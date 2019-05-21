@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 from res.bot import send_public_message as send_to_webhook
+from res.keuzemenu import events
 import res.data as data
 import res.keuzes as keuzes
 import os
@@ -149,70 +150,29 @@ def keuze_menu(name):
     if name not in ["Brom", "Harissa", "Mork", "Swammy", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"]:
         return 'Invalid name.'
     
-    events = [
-        {
-            'name': 'Spelletjes spellen',
-            'desc': 'Lekker met zijn allen een avondje spelletjes spelen bij iemand thuis!',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Een cafeetje pakken',
-            'desc': 'Een drankje doen met je matties in een heerlijk café.',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Lasergamen',
-            'desc': 'In Amersfoort een uurtje lasergamen met max. 13 personen... wie wil dat nou niet?',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Bram helpen klussen',
-            'desc': 'Bram heeft een nieuwe kamer... wie zou hem nou niet willen ondersteunen in het opknappen van zijn kamer?',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Escape room',
-            'desc': 'Wat is er nou leuker dan een escape room doen? Het staat al zo lang in ons vizier, tijd om het nu ECHT te doen!',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Poulen',
-            'desc': 'Het is een relaxte bezigheid, maar wie zou er nou niet willen chillen met ballen en stokken?',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Sietse helpen daten',
-            'desc': 'Sietse is alleen, eenzaam en single. Wie helpt hem aan een vriendin? en Bram is Gay.',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Niks doen',
-            'desc': 'Soms kan het zo simpel zijn.',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'D&D Oneshot',
-            'desc': 'Voor de D&D liefhebbers is er niets leukers dan te proberen een klein avontuur te beleven met hun favoriete X-Files vrienden!',
-            'score': 0,
-            'total': 9
-        },
-        {
-            'name': 'Hackathon',
-            'desc': 'De Spyfall website waar we ons NU op bevinden - is best wel een troep. Het idee om terug te gaan, nog een poging te wagen en menig hart te verblijden, zal iedereen gelukkig maken.',
-            'score': 0,
-            'total': 9
-        }
-    ]
+    options = []
 
-    return render_template('keuzemenu.html', options=events, person=name)
+    for event in events:
+        option = {
+            'name': event['name'],
+            'desc': event['desc'],
+            'yes': len(event['yes']),
+            'maybe': len(event['maybe']),
+            'no': len(event['no'])
+        }
+
+        if name in event['yes']:
+            option['yourChoice'] = 'yes'
+        elif name in event['maybe']:
+            option['yourChoice'] = 'maybe'
+        elif name in event['no']:
+            option['yourChoice'] = 'no'
+        else:
+            continue
+        
+        options.append(option)
+
+    return render_template('keuzemenu.html', options=options, person=name)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
