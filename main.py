@@ -135,7 +135,7 @@ def evil_sister_image():
 @app.route('/counter/reset')
 def create_database():
     keuzes.init_database()
-    return 'OK! Database reset!'
+    return 'OK! Database reset! Yay!'
 
 @app.route('/counter/add')
 def get_counter():
