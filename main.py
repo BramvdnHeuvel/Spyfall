@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
+from res.bot import send_public_message as send_to_webhook
 import res.data as data
 import res.keuzes as keuzes
 import os
@@ -129,17 +130,77 @@ def story_second_check(answer_1, answer_2, answer_3, answer_4, answer_5):
 
 @app.route('/what-the-sisters-looked-like')
 def evil_sister_image():
+    send_to_webhook('Somebody got the sisters\' picture.')
     return render_template('sisters.html')
 
 
-@app.route('/counter/reset')
-def create_database():
-    keuzes.init_database()
-    return 'OK! Database reset! Yay!'
+@app.route('/api/v1/keuzes/addevent/<name>/<description>')
+def request_event(name, description):
+    send_to_webhook(f'Somebody requested the following event:\n```{name}```\n**Description:**```{description}```')
+    return jsonify({})
 
-@app.route('/counter/add')
-def get_counter():
-    return str(keuzes.get_counter())
+@app.route('/api/v1/keuzes/choose-event/<event>/<person>/<yesorno>')
+def say_yes_or_no(event, person, yesorno):
+    send_to_webhook(f"{person} said **{yesorno.upper()}** to the event ```{event}```")
+    return jsonify({})
+
+@app.route('/keuzemenu/<name>')
+def keuze_menu(name):
+    if name not in ["Brom", "Harissa", "Mork", "Swammy", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"]:
+        return 'Invalid name.'
+    
+    events = [
+        {
+            'name': 'Spelletjes spellen',
+            'desc': 'Lekker met zijn allen een avondje spelletjes spelen bij iemand thuis!',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Een cafeetje pakken',
+            'desc': 'Een drankje doen met je matties in een heerlijk café.',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Lasergamen',
+            'desc': 'In Amersfoort een uurtje lasergamen met max. 13 personen... wie wil dat nou niet?',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Bram helpen klussen',
+            'desc': 'Bram heeft een nieuwe kamer... wie zou hem nou niet willen ondersteunen in het opknappen van zijn kamer?',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Escape room',
+            'desc': 'Wat is er nou leuker dan een escape room doen? Het staat al zo lang in ons vizier, tijd om het nu ECHT te doen!',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Poulen',
+            'desc': 'Het is een relaxte bezigheid, maar wie zou er nou niet willen chillen met ballen en stokken?',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Sietse helpen daten',
+            'desc': 'Sietse is alleen, eenzaam en single. Wie helpt hem aan een vriendin? en Bram is Gay.',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Niks doen',
+            'desc': 'Soms kan het zo simpel zijn.',
+            'score': 0,
+            'total': 9
+        }
+    ]
+
+    return render_template('keuzemenu.html', options=events, person=name)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

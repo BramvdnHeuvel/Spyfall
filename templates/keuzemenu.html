@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Keuzemenu</title>
+        <link rel="stylesheet" type="text/css" href="/static/acccordion.css">
+
+        <script src="/static/vue_offline.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <script src="/static/tools.js"></script>
+    </head>
+    <body>
+        {% for option in options %}
+            <div id="{{ option.name.replace(' ', '') }}">
+                <button class="accordion">
+                    <div class="databox" style="left: 10px;font-size:31px;">{{ option.name }}</div>
+                </button>
+                <div class="panel" style="position: relative">
+                    <p style="left: 10px;font-size:31px;">{{ option.desc }}</p>
+                    <p class="databox" style="right:0;bottom:0;">{{ option.score }}/{{ option.total }}</p>
+                    <p v-if="clicked">OKAY!</p>
+                    <div v-else>
+                        <button v-on:click="sayYesOrNo('yes')">YES</button>
+                        <button v-on:click="sayYesOrNo('no')">NO</button>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var anotherVue = new Vue({
+                    el: "#{{ option.name.replace(' ', '') }}",
+                    data: {
+                        clicked: false
+                    },
+                    methods: {
+                        sayYesOrNo: function(choice) {
+                            getData('/api/v1/keuzes/choose-event/{{ option.name }}/{{ person }}/' + choice + '',
+                                function(response) {
+                                    console.log(response);
+                                }
+                            );
+                            this.clicked = true;
+                        }
+                    }
+                });
+            </script>
+        {% endfor %}
+        <div id="submit">
+            <div v-if="!submitted">
+                <h1>Jouw eigen suggestie!</h1>
+                <h3>Titel</h3>
+                <input v-model="name">
+                <h3>Beschrijving</h3>
+                <textarea rows="5" cols="80" id="TITLE" v-model="description">
+                </textarea>
+                <button v-on:click="submitStuff()">SUBMIT</button>
+            </div>
+            <div v-else>OKAY!</div>
+        </div>
+        <script>
+            var submitter = new Vue({
+                el: "#submit",
+                data: {
+                    name: '',
+                    description: '',
+                    submitted: false
+                },
+                methods: {
+                    submitStuff: function() {
+                        var name = this.name === '' ? 'NA' : this.name;
+                        var desc = this.description === '' ? 'NA' : this.description;
+                        submitRequest: getData('/api/v1/keuzes/addevent/' + name + '/' + desc, function(response) {
+                            console.log(response);
+                        });
+                        this.submitted = true;
+                    }
+                }
+            });
+        </script>
+        <script src="/static/accordion.js"></script>
+    </body>
+</html>
