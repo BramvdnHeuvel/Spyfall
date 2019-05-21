@@ -197,6 +197,18 @@ def keuze_menu(name):
             'desc': 'Soms kan het zo simpel zijn.',
             'score': 0,
             'total': 9
+        },
+        {
+            'name': 'D&D Oneshot',
+            'desc': 'Voor de D&D liefhebbers is er niets leukers dan te proberen een klein avontuur te beleven met hun favoriete X-Files vrienden!',
+            'score': 0,
+            'total': 9
+        },
+        {
+            'name': 'Hackathon',
+            'desc': 'De Spyfall website waar we ons NU op bevinden - is best wel een troep. Het idee om terug te gaan, nog een poging te wagen en menig hart te verblijden, zal iedereen gelukkig maken.',
+            'score': 0,
+            'total': 9
         }
     ]
 
