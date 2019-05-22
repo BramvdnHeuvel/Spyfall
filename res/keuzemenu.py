@@ -63,14 +63,14 @@ events = [
         'no': ['Riineer', 'Egdar']
     },
     {
-        'name': 'D&D Oneshot',
+        'name': 'DnD Oneshot',
         'desc': 'Voor de D&D liefhebbers is er niets leukers dan te proberen een klein avontuur te beleven met hun favoriete X-Files vrienden!',
         'yes': ['Brom'],
         'maybe': ["Harissa", "Mork", "Swammy", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"],
         'no': []
     },
     {
-        'name': 'Picknick & zwemmen',
+        'name': 'Picknick en zwemmen',
         'desc': 'Zeg nou zelf, wat is er leuker op een warme zomerdag dan gezellig picknicken en af en toe zwemmen op een prachtige locatie?',
         'yes': ['Brom'],
         'maybe': ["Harissa", "Mork", "Seneca", "Swammy", "Egdar", "Mickey", "Riineer", "Meesje"],
