@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 from res.bot import send_public_message as send_to_webhook
-from res.keuzemenu import events
+from res.keuzemenu import events, calculate_event_score
 import res.data as data
 import res.keuzes as keuzes
 import os
@@ -140,16 +140,21 @@ def request_event(name, description):
     send_to_webhook(f'Somebody requested the following event:\n```{name}```\n**Description:**```{description}```')
     return jsonify({})
 
-@app.route('/api/v1/keuzes/choose-event/<event>/<person>/<yesorno>')
-def say_yes_or_no(event, person, yesorno):
-    send_to_webhook(f"{person} said **{yesorno.upper()}** to the event ```{event}```")
-    return jsonify({})
+@app.route('/api/v1/keuzes/choose-event/<event_name>/<person>/<yesorno>')
+def say_yes_or_no(event_name, person, yesorno):
+    send_to_webhook(f"{person} said **{yesorno.upper()}** to the event ```{event_name}```")
+    for event in events:
+        if event['name'] == event_name:
+            event['NA'].remove(person)
+            event[yesorno].append(person)
+            return jsonify({})
 
 @app.route('/keuzemenu/<name>')
 def keuze_menu(name):
     if name not in ["Brom", "Harissa", "Mork", "Swammy", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"]:
         return 'Invalid name.'
     
+    print(events)
     options = []
 
     for event in events:
@@ -157,20 +162,32 @@ def keuze_menu(name):
             'name': event['name'],
             'desc': event['desc'],
             'yes': len(event['yes']),
+            'probably': len(event['probably']),
             'maybe': len(event['maybe']),
-            'no': len(event['no'])
+            'hmm': len(event['hmm']),
+            'no': len(event['no']),
+            'NA': len(event['NA'])
         }
+        option['popularity'] = int(calculate_event_score(option)*100)
 
         if name in event['yes']:
-            option['yourChoice'] = 'yes'
+            option['yourChoice'] = 'omg yes'
+        elif name in event['probably']:
+            option['yourChoice'] = 'yeah'
         elif name in event['maybe']:
             option['yourChoice'] = 'maybe'
+        elif name in event['hmm']:
+            option['yourChoice'] = 'hmm'
         elif name in event['no']:
-            option['yourChoice'] = 'no'
+            option['yourChoice'] = 'meh'
+        elif name in event['NA']:
+            option['yourChoice'] = 'NA'
         else:
             continue
         
         options.append(option)
+
+    options.sort(key=calculate_event_score, reverse=True)
 
     return render_template('keuzemenu.html', options=options, person=name)
 

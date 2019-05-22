@@ -11,20 +11,19 @@
         {% for option in options %}
             <div id="{{ option.name.replace(' ', '') }}">
                 <button class="accordion">
-                    <div class="databox" style="left: 10px;font-size:31px;
-                        {% if option.yourChoice == 'yes' %}color:green;
-                        {% elif option.yourChoice == 'no' %}color:darkred;
-                        {% endif %}
-                    ">{{ option.name }}</div>
-                    <div class="databox" style="right:0;bottom:0;top:auto;">{{ option.yes }} ja - {{ option.no }} nee - {{ option.maybe }} nog niet ingevuld</div>
+                    <div class="databox" style="left: 10px;font-size:31px;">{{ option.name }}</div>
+                    <div class="databox" style="right:0;bottom:0;top:auto;">{{ option.popularity }}% approves</div>
                 </button>
                 <div class="panel" style="position: relative">
                     <p style="left: 10px;font-size:31px;">{{ option.desc }}</p>
-                    {% if option.yourChoice == 'maybe' %}
+                    {% if option.yourChoice == 'NA' %}
                         <p v-if="clicked">OKAY!</p>
                         <div v-else>
-                            <button v-on:click="sayYesOrNo('yes')">YES</button>
-                            <button v-on:click="sayYesOrNo('no')">NO</button>
+                            <button v-on:click="sayYesOrNo('yes')">OMG YES</button>
+                            <button v-on:click="sayYesOrNo('probably')">Yeah</button>
+                            <button v-on:click="sayYesOrNo('maybe')">Maybe?</button>
+                            <button v-on:click="sayYesOrNo('hmm')">Hmm</button>
+                            <button v-on:click="sayYesOrNo('no')">Meh</button>
                         </div>
                     {% else %}
                         <p style="left: 10px;font-size:31px;"><b>Your choice: {{ option.yourChoice }}</b></B></p>
