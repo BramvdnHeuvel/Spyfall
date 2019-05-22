@@ -133,11 +133,11 @@ events = [
         'name': 'Picknick en NIET zwemmen',
         'desc': 'Zeg nou zelf, wat is er leuker op een warme zomerdag dan gezellig picknicken - en de germaphobes blij te maken door niet in het water te springen?',
         'yes': [],
-        'probably': [],
+        'probably': ['Mork'],
         'maybe': [],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Mork', 'Egdar', 'Riineer', "Harissa", "Swammy", "Seneca", "Mickey", "Meesje"],
+        'NA': ['Egdar', 'Riineer', "Harissa", "Swammy", "Seneca", "Mickey", "Meesje"],
     }
 ]
 
