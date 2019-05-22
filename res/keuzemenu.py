@@ -2,15 +2,22 @@ events = [
     {
         'name': 'Lasergamen',
         'desc': 'In Amersfoort een uurtje lasergamen met max. 13 personen... wie wil dat nou niet?',
-        'yes': ['Brom', 'Mork', 'Swammy'],
-        'maybe': ["Harissa", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"],
+        'yes': ['Brom', 'Mork', 'Swammy', 'Egdar'],
+        'maybe': ["Harissa", "Seneca", "Mickey", "Riineer", "Meesje"],
         'no': []
     },
     {
         'name': 'Spelletjes spelen',
         'desc': 'Lekker met zijn allen een avondje spelletjes spelen bij iemand thuis!',
-        'yes': ['Brom', 'Swammy', 'Riineer'],
-        'maybe': ["Harissa", "Seneca", "Egdar", "Mickey", "Meesje"],
+        'yes': ['Brom', 'Swammy', 'Riineer', 'Egdar'],
+        'maybe': ["Harissa", "Seneca", "Mickey", "Meesje"],
+        'no': ['Mork']
+    },
+    {
+        'name': 'Een cafeetje pakken',
+        'desc': 'Een drankje doen met je matties in een heerlijk café.',
+        'yes': ['Brom', 'Swammy', 'Egdar', 'Riineer'],
+        'maybe': ["Harissa", "Seneca", "Mickey", "Meesje"],
         'no': ['Mork']
     },
     {
@@ -21,39 +28,25 @@ events = [
         'no': ['Swammy']
     },
     {
-        'name': 'Een cafeetje pakken',
-        'desc': 'Een drankje doen met je matties in een heerlijk café.',
-        'yes': ['Brom', 'Swammy', 'Riineer'],
-        'maybe': ["Harissa", "Seneca", "Egdar", "Mickey", "Meesje"],
-        'no': ['Mork']
+        'name': 'Sietse helpen daten',
+        'desc': 'Sietse is alleen, eenzaam en single. Wie helpt hem aan een vriendin? en Bram is Gay.',
+        'yes': ['Brom', 'Egdar', 'Riineer'],
+        'maybe': ["Harissa", "Mork", "Seneca", "Mickey", "Meesje"],
+        'no': ['Swammy']
     },
     {
         'name': 'Escape room',
         'desc': 'Wat is er nou leuker dan een escape room doen? Het staat al zo lang in ons vizier, tijd om het nu ECHT te doen!',
         'yes': ['Brom', 'Swammy'],
-        'maybe': ["Harissa", "Mork", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"],
-        'no': []
+        'maybe': ["Harissa", "Mork", "Seneca", "Mickey", "Riineer", "Meesje"],
+        'no': ['Egdar']
     },
     {
         'name': 'Poulen',
         'desc': 'Het is een relaxte bezigheid, maar wie zou er nou niet willen chillen met ballen en stokken?',
         'yes': ['Brom', 'Swammy'],
-        'maybe': ["Harissa", "Mork", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"],
-        'no': []
-    },
-    {
-        'name': 'Hackathon',
-        'desc': 'De Spyfall website waar we ons NU op bevinden - is best wel een troep. Het idee om terug te gaan, nog een poging te wagen en menig hart te verblijden, zal iedereen gelukkig maken.',
-        'yes': ['Brom', 'Swammy'],
-        'maybe': ["Harissa", "Mork", "Seneca", "Egdar", "Mickey", "Meesje"],
-        'no': ['Riineer']
-    },
-    {
-        'name': 'Sietse helpen daten',
-        'desc': 'Sietse is alleen, eenzaam en single. Wie helpt hem aan een vriendin? en Bram is Gay.',
-        'yes': ['Brom', 'Riineer'],
-        'maybe': ["Harissa", "Mork", "Seneca", "Egdar", "Mickey", "Meesje"],
-        'no': ['Swammy']
+        'maybe': ["Harissa", "Mork", "Seneca", "Mickey", "Riineer", "Meesje"],
+        'no': ['Egdar']
     },
     {
         'name': 'Bram helpen klussen',
@@ -61,6 +54,13 @@ events = [
         'yes': ["Riineer", 'Brom'],
         'maybe': ["Harissa", "Mork", "Seneca", "Egdar", "Mickey", "Meesje"],
         'no': ['Swammy']
+    },
+    {
+        'name': 'Hackathon',
+        'desc': 'De Spyfall website waar we ons NU op bevinden - is best wel een troep. Het idee om terug te gaan, nog een poging te wagen en menig hart te verblijden, zal iedereen gelukkig maken.',
+        'yes': ['Brom', 'Swammy'],
+        'maybe': ["Harissa", "Mork", "Seneca", "Mickey", "Meesje"],
+        'no': ['Riineer', 'Egdar']
     },
     {
         'name': 'D&D Oneshot',
