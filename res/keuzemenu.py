@@ -137,7 +137,7 @@ events = [
         'maybe': [],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Egdar', 'Riineer', "Harissa", "Swammy", "Seneca", "Mickey", "Meesje"],
+        'NA': ['Mork', 'Egdar', 'Riineer', "Harissa", "Swammy", "Seneca", "Mickey", "Meesje"],
     }
 ]
 
