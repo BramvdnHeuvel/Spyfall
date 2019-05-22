@@ -57,7 +57,7 @@ events = [
     },
     {
         'name': 'LAN Party',
-        'desc': 'De mensen die hieraan meegedaan hebben, kunnen in geuren en kleuren vertellen hoe leuk het is; spelletjes spelen, maar dan digitaal! Niets is leuker dan je kapot lachen bij het spelen van debiele spelletjes, het competitief spelen van een debiel spelletje of het proberen samen te overleven in een Minecraft wereld.',
+        'desc': 'De mensen die hieraan meegedaan hebben, kunnen in geuren en kleuren vertellen hoe leuk het is; spelletjes spelen, maar dan digitaal! Niets is leuker dan je kapot lachen bij het spelen van debiele spelletjes, het competitief spelen van een shooter of het proberen samen te werken in een klungelige cooperative game.',
         'yes': ['Brom', 'Seneca'],
         'maybe': ["Harissa", "Mork", 'Riineer', "Swammy", "Egdar", "Mickey", "Meesje"],
         'no': []
@@ -82,5 +82,12 @@ events = [
         'yes': ['Brom'],
         'maybe': ["Harissa", "Mork", "Swammy", "Egdar", "Mickey", "Riineer", "Meesje"],
         'no': ['Seneca']
+    },
+    {
+        'name': 'Minecraft Marathon',
+        'desc': 'Laat je verbazen hoe leuk het kan zijn om te proberen een halve dag te overleven in een simpel spelletje zoals Minecraft. Team building, eindeloze gesprekken tijdens het werken en rustige samenwerkingen gegarandeerd!',
+        'yes': ['Brom'],
+        'maybe': ["Harissa", "Mork", "Swammy", "Seneca", "Egdar", "Mickey", "Riineer", "Meesje"],
+        'no': []
     }
 ]
