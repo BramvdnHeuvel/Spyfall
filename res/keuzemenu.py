@@ -124,7 +124,7 @@ events = [
         'desc': 'Laat je verbazen hoe leuk het kan zijn om te proberen een halve dag te overleven in een simpel spelletje zoals Minecraft. Team building, eindeloze gesprekken tijdens het werken en rustige samenwerkingen gegarandeerd!',
         'yes': ['Brom', 'Meesje'],
         'probably': ['Harissa'],
-        'maybe': ['Mork'],
+        'maybe': ['Mork', 'Riineer'],
         'hmm': ['Egdar', 'Seneca'],
         'no': ['Swammy'],
         'NA': ["Mickey", "Riineer"],
@@ -133,11 +133,11 @@ events = [
         'name': 'Picknick en NIET zwemmen',
         'desc': 'Zeg nou zelf, wat is er leuker op een warme zomerdag dan gezellig picknicken - en de germaphobes blij te maken door niet in het water te springen?',
         'yes': ['Meesje', 'Swammy'],
-        'probably': ['Mork', 'Harissa'],
+        'probably': ['Mork', 'Harissa', 'Riineer'],
         'maybe': ['Egdar', 'Seneca'],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Riineer', "Mickey"],
+        'NA': ["Mickey"],
     },
     {
         'name': 'Photo Shooter',
@@ -153,11 +153,11 @@ events = [
         'name': 'Truffels',
         'desc': 'Een microdosering zorgt algauw voor wat meer mindfulness. Samen met vrienden zijn is de beste gelegenheid om truffels eens te proberen.',
         'yes': ['Swammy'],
-        'probably': ['Egdar'],
+        'probably': ['Egdar', 'Riineer'],
         'maybe': [],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Harissa', 'Riineer', 'Mork', 'Meesje', "Seneca", "Mickey"],
+        'NA': ['Harissa', 'Mork', 'Meesje', "Seneca", "Mickey"],
     }
 ]
 
