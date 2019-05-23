@@ -11,7 +11,10 @@
         {% for option in options %}
             <div id="{{ option.name.replace(' ', '') }}">
                 <button class="accordion">
-                    <div class="databox" style="left: 10px;font-size:31px;">{{ option.name }}</div>
+                    <div class="databox" style="left: 10px;font-size:31px;">
+                        {% if option.yourChoice == 'NA' %}>{% endif %}
+                        {{ option.name }}
+                    </div>
                     <div class="databox" style="right:0;bottom:0;top:auto;">{{ option.popularity }}% approves</div>
                 </button>
                 <div class="panel" style="position: relative">
