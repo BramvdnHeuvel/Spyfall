@@ -143,21 +143,21 @@ events = [
         'name': 'Photo Shooter',
         'desc': 'Heb je altijd al de Hunger Games in real life willen proberen, maar vind jij de gedachte aan een speer door je schouder ook zo naar? Speel Photo Shooter, het spel waarbij je een gebied afspreekt (bijv. het Science Park), en vecht tot de dood. Hoe sterf je? Zodra iemand een foto van je weet te maken en in de X-Files kan posten, is het met je gedaan! Een super intens spel wat de adrenaline sowieso door je lijf laat gieren.',
         'yes': ['Brom'],
-        'probably': ['Harissa'],
+        'probably': ['Harissa', 'Egdar'],
         'maybe': ['Swammy', 'Riineer'],
         'hmm': [],
         'no': [],
-        'NA': ['Mork', 'Meesje', 'Egdar', "Seneca", "Mickey"],
+        'NA': ['Mork', 'Meesje', "Seneca", "Mickey"],
     },
     {
         'name': 'Truffels',
         'desc': 'Een microdosering zorgt algauw voor wat meer mindfulness. Samen met vrienden zijn is de beste gelegenheid om truffels eens te proberen.',
         'yes': [],
-        'probably': [],
+        'probably': ['Egdar'],
         'maybe': [],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Swammy', 'Harissa', 'Riineer', 'Mork', 'Meesje', 'Egdar', "Seneca", "Mickey"],
+        'NA': ['Swammy', 'Harissa', 'Riineer', 'Mork', 'Meesje', "Seneca", "Mickey"],
     }
 ]
 
