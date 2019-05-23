@@ -152,12 +152,12 @@ events = [
     {
         'name': 'Truffels',
         'desc': 'Een microdosering zorgt algauw voor wat meer mindfulness. Samen met vrienden zijn is de beste gelegenheid om truffels eens te proberen.',
-        'yes': [],
+        'yes': ['Swammy'],
         'probably': ['Egdar'],
         'maybe': [],
         'hmm': ['Brom'],
         'no': [],
-        'NA': ['Swammy', 'Harissa', 'Riineer', 'Mork', 'Meesje', "Seneca", "Mickey"],
+        'NA': ['Harissa', 'Riineer', 'Mork', 'Meesje', "Seneca", "Mickey"],
     }
 ]
 
@@ -173,3 +173,38 @@ def calculate_relative_score(event):
     score = event['yes'] + event['probably'] + event['maybe'] + event['hmm'] + event['no']
     
     return score/(score+event['NA'])
+
+def fun_factor(members):
+    def calculate_fun_factor(event):
+        score = 0
+
+        for person in event['yes']:
+            if person in members:
+                score += 4
+            else:
+                score += -2
+            
+        for person in event['probably']:
+            if person in members:
+                score += 3
+            else:
+                score += -1
+        
+        for person in event['maybe']:
+            if person in members:
+                score += 2
+        
+        for person in event['hmm']:
+            if person in members:
+                score += 1
+            else:
+                score += 1
+        
+        for person in event['no']:
+            if person in members:
+                score += 0
+            else:
+                score += 2
+        
+        return score
+    return calculate_fun_factor

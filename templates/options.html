@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>The results</title>
+        <link rel="stylesheet" type="text/css" href="/static/acccordion.css">
+
+        <script src="/static/vue_offline.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <script src="/static/tools.js"></script>
+    </head>
+    <body>
+        <div id='dashboard'>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="bram" value="Brom" >
+                <label style="font-size:40px;" for="bram">Bram</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="larissa" value="Harissa" >
+                <label style="font-size:40px;" for="larissa">Larissa</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="mark" value="Mork" >
+                <label style="font-size:40px;" for="mark">Mark</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="mick" value="Mickey" >
+                <label style="font-size:40px;" for="mick">Mick</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="reinier" value="Riineer" >
+                <label style="font-size:40px;" for="reinier">Reinier</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="sam" value="Swammy" >
+                <label style="font-size:40px;" for="sam">Sam</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="senna" value="Seneca" >
+                <label style="font-size:40px;" for="senna">Senna</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="sietse" value="Egdar" >
+                <label style="font-size:40px;" for="sietse">Sietse</label>
+            </div>
+            <div>
+                <input v-model="checkedNames" type="checkbox" style="width:30px;height:30px;" id="zwaantje" value="Meesje" >
+                <label style="font-size:40px;" for="zwaantje">Zwaantje</label>
+            </div>
+            <br>
+            {% raw %}
+            <div v-for="option in options" style="padding-top: 10px;">
+                <button class="accordion">
+                    <div class="databox" style="left: 10px;font-size:31px;">{{ option.name }}</div>
+                </button>
+                <div class="panel" style="position: relative">
+                    <p style="left: 10px;font-size:31px;">{{ option.desc }}</p>
+                </div>
+            </div>
+            {% endraw %}
+        </div>
+        <script>
+            const loading = [
+                {name: 'Loading...', desc: 'Please wait...', score: 0},
+                {name: 'Loading...', desc: 'Please wait...', score: 0},
+                {name: 'Loading...', desc: 'Please wait...', score: 0}
+            ];
+
+            var dash = new Vue({
+              el: '#dashboard',
+              data: {
+                checkedNames: [],
+                options: loading
+              },
+              watch: {
+                checkedNames: function() {
+                  console.log(this.checkedNames.join(','));
+                  const self = this;
+                  self.options = loading;
+
+                  getData('/api/v1/find-event/' + self.checkedNames.join(','), function(response) {
+                    self.options = response;
+                  });
+                }
+              }
+            });
+        </script>
+        <script src="/static/accordion.js"></script>
+    </body>
+</html>

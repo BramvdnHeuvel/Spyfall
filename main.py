@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 from res.bot import send_public_message as send_to_webhook
-from res.keuzemenu import events, calculate_event_score, calculate_relative_score
+from res.keuzemenu import events, calculate_event_score, calculate_relative_score, fun_factor
 import res.data as data
 import res.keuzes as keuzes
 import os
@@ -191,6 +191,29 @@ def keuze_menu(name):
     options.sort(key=calculate_event_score, reverse=True)
 
     return render_template('keuzemenu.html', options=options, person=name)
+
+@app.route('/api/v1/find-event/<members>')
+def find_perfect_event(members):
+    members = members.split(',')
+
+    random.shuffle(events)
+    events.sort(key=fun_factor(members), reverse=True)
+
+    options = []
+
+    for event in events[0:3]:
+        option = {
+            "name": event["name"],
+            "desc": event["desc"],
+            "score": fun_factor(members)(event)
+        }
+        options.append(option)
+
+    return jsonify(options)
+
+@app.route('/keuzemenu/results')
+def get_keuzemenu_results():
+    return render_template('options.html')
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
