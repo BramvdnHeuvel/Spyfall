@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, jsonify, redirect, url_for
 from res import stream, names
 from res.bot import send_public_message as send_to_webhook
-from res.keuzemenu import events, calculate_event_score
+from res.keuzemenu import events, calculate_event_score, calculate_relative_score
 import res.data as data
 import res.keuzes as keuzes
 import os
@@ -169,6 +169,7 @@ def keuze_menu(name):
             'NA': len(event['NA'])
         }
         option['popularity'] = int(calculate_event_score(option)*100)
+        option['relative'] = int(calculate_relative_score(option)*100)
 
         if name in event['yes']:
             option['yourChoice'] = 'omg yes'

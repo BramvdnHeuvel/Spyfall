@@ -15,7 +15,7 @@
                         {% if option.yourChoice == 'NA' %}>{% endif %}
                         {{ option.name }}
                     </div>
-                    <div class="databox" style="right:0;bottom:0;top:auto;">{{ option.popularity }}% approves</div>
+                    <div class="databox" style="right:0;bottom:0;top:auto;">{{ option.popularity }}% approves - {{ option.relative }}% has filled in</div>
                 </button>
                 <div class="panel" style="position: relative">
                     <p style="left: 10px;font-size:31px;">{{ option.desc }}</p>
