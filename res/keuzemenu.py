@@ -3,11 +3,11 @@ events = [
         'name': 'Lasergamen',
         'desc': 'In Amersfoort een uurtje lasergamen met max. 13 personen... wie wil dat nou niet?',
         'yes': ['Brom', 'Egdar', 'Mork'],
-        'probably': ['Meesje', 'Seneca', 'Harissa'],
+        'probably': ['Meesje', 'Seneca', 'Harissa', 'Mickey'],
         'maybe': ['Riineer', 'Swammy'],
         'hmm': [],
         'no': [],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Een cafeetje pakken',
@@ -16,18 +16,18 @@ events = [
         'probably': ['Riineer', 'Mork', 'Meesje', 'Swammy', 'Harissa'],
         'maybe': ['Brom', 'Seneca'],
         'hmm': [],
-        'no': [],
-        'NA': ["Mickey"],
+        'no': ['Mickey'],
+        'NA': [],
     },
     {
         'name': 'Spelletjes spelen',
         'desc': 'Lekker met zijn allen een avondje spelletjes spelen bij iemand thuis!',
-        'yes': ['Brom', 'Riineer', 'Meesje', 'Seneca', 'Swammy', 'Harissa'],
+        'yes': ['Brom', 'Riineer', 'Meesje', 'Seneca', 'Swammy', 'Harissa', 'Mickey'],
         'probably': ['Egdar', 'Mork'],
         'maybe': [],
         'hmm': [],
         'no': [],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Sietse helpen daten',
@@ -36,18 +36,18 @@ events = [
         'probably': ['Riineer', 'Egdar', 'Harissa'],
         'maybe': ['Brom', 'Seneca'],
         'hmm': ['Mork', 'Swammy'],
-        'no': [],
-        'NA': ["Mickey"],
+        'no': ['Mickey'],
+        'NA': [],
     },
     {
         'name': 'Escape room',
         'desc': 'Wat is er nou leuker dan een escape room doen? Het staat al zo lang in ons vizier, tijd om het nu ECHT te doen!',
         'yes': ['Brom', 'Mork', 'Meesje', 'Swammy', 'Harissa'],
-        'probably': ['Egdar', 'Seneca'],
+        'probably': ['Egdar', 'Seneca', 'Mickey'],
         'maybe': ['Riineer'],
         'hmm': [],
         'no': [],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Bram helpen klussen',
@@ -55,9 +55,9 @@ events = [
         'yes': ['Brom', 'Mork'],
         'probably': ['Riineer', 'Seneca'],
         'maybe': ['Egdar', 'Harissa'],
-        'hmm': ['Meesje'],
+        'hmm': ['Meesje', 'Mickey'],
         'no': ['Swammy'],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Niks doen',
@@ -65,9 +65,9 @@ events = [
         'yes': ['Mork', 'Meesje', 'Harissa'],
         'probably': ['Egdar'],
         'maybe': ['Riineer', 'Seneca', 'Swammy'],
-        'hmm': ['Brom'],
+        'hmm': ['Brom', 'Mickey'],
         'no': [],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Picknick en zwemmen',
@@ -76,28 +76,28 @@ events = [
         'probably': ['Meesje', 'Swammy'],
         'maybe': ['Brom', 'Seneca'],
         'hmm': ['Egdar'],
-        'no': ['Mork', 'Harissa'],
-        'NA': ["Mickey"],
+        'no': ['Mork', 'Harissa', 'Mickey'],
+        'NA': [],
     },
     {
         'name': 'LAN Party',
         'desc': 'De mensen die hieraan meegedaan hebben, kunnen in geuren en kleuren vertellen hoe leuk het is; spelletjes spelen, maar dan digitaal! Niets is leuker dan je kapot lachen bij het spelen van debiele spelletjes, het competitief spelen van een shooter of het proberen samen te werken in een klungelige cooperative game.',
         'yes': ['Brom', 'Egdar', 'Meesje', 'Seneca'],
-        'probably': ['Mork'],
+        'probably': ['Mork', 'Mickey'],
         'maybe': ['Harissa'],
         'hmm': [],
         'no': ['Riineer', 'Swammy'],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Poulen',
         'desc': 'Het is een relaxte bezigheid, maar wie zou er nou niet willen chillen met ballen en stokken?',
         'yes': [],
         'probably': ['Brom', 'Mork', 'Meesje', 'Seneca', 'Swammy'],
-        'maybe': ['Riineer', 'Egdar'],
+        'maybe': ['Riineer', 'Egdar', 'Mickey'],
         'hmm': [],
         'no': ['Harissa'],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Hackathon',
@@ -105,29 +105,29 @@ events = [
         'yes': ['Brom', 'Mork'],
         'probably': [],
         'maybe': ['Swammy', 'Harissa'],
-        'hmm': ['Meesje', 'Seneca'],
+        'hmm': ['Meesje', 'Seneca', 'Mickey'],
         'no': ['Riineer', 'Egdar'],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'DnD Oneshot',
         'desc': 'Voor de D&D liefhebbers is er niets leukers dan te proberen een klein avontuur te beleven met hun favoriete X-Files vrienden!',
         'yes': ['Brom', 'Meesje', 'Swammy'],
-        'probably': ['Egdar', 'Mork', 'Harissa'],
+        'probably': ['Egdar', 'Mork', 'Harissa', 'Mickey'],
         'maybe': [],
         'hmm': ['Riineer'],
         'no': ['Seneca'],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Minecraft Marathon',
         'desc': 'Laat je verbazen hoe leuk het kan zijn om te proberen een halve dag te overleven in een simpel spelletje zoals Minecraft. Team building, eindeloze gesprekken tijdens het werken en rustige samenwerkingen gegarandeerd!',
-        'yes': ['Brom', 'Meesje'],
+        'yes': ['Brom', 'Meesje', 'Mickey'],
         'probably': ['Harissa'],
         'maybe': ['Mork', 'Riineer'],
         'hmm': ['Egdar', 'Seneca'],
         'no': ['Swammy'],
-        'NA': ["Mickey", "Riineer"],
+        'NA': [],
     },
     {
         'name': 'Picknick en NIET zwemmen',
@@ -135,19 +135,19 @@ events = [
         'yes': ['Meesje', 'Swammy'],
         'probably': ['Mork', 'Harissa', 'Riineer'],
         'maybe': ['Egdar', 'Seneca'],
-        'hmm': ['Brom'],
+        'hmm': ['Brom', 'Mickey'],
         'no': [],
-        'NA': ["Mickey"],
+        'NA': [],
     },
     {
         'name': 'Photo Shooter',
         'desc': 'Heb je altijd al de Hunger Games in real life willen proberen, maar vind jij de gedachte aan een speer door je schouder ook zo naar? Speel Photo Shooter, het spel waarbij je een gebied afspreekt (bijv. het Science Park), en vecht tot de dood. Hoe sterf je? Zodra iemand een foto van je weet te maken en in de X-Files kan posten, is het met je gedaan! Een super intens spel wat de adrenaline sowieso door je lijf laat gieren.',
         'yes': ['Brom'],
         'probably': ['Harissa', 'Egdar'],
-        'maybe': ['Swammy', 'Riineer'],
+        'maybe': ['Mork', 'Swammy', 'Riineer', 'Mickey'],
         'hmm': [],
         'no': [],
-        'NA': ['Mork', 'Meesje', "Seneca", "Mickey"],
+        'NA': ['Meesje', "Seneca"],
     },
     {
         'name': 'Truffels',
@@ -156,8 +156,8 @@ events = [
         'probably': ['Egdar', 'Riineer'],
         'maybe': [],
         'hmm': ['Brom'],
-        'no': [],
-        'NA': ['Harissa', 'Mork', 'Meesje', "Seneca", "Mickey"],
+        'no': ['Mork', 'Mickey'],
+        'NA': ['Harissa', 'Meesje', "Seneca"],
     }
 ]
 
@@ -180,30 +180,32 @@ def fun_factor(members):
 
         for person in event['yes']:
             if person in members:
-                score += 4
+                score += 2
             else:
                 score += -2
             
         for person in event['probably']:
             if person in members:
-                score += 3
+                score += 1
             else:
                 score += -1
         
         for person in event['maybe']:
             if person in members:
-                score += 2
+                score += 0
         
         for person in event['hmm']:
             if person in members:
-                score += 1
+                score += -1
             else:
+                continue
                 score += 1
         
         for person in event['no']:
             if person in members:
-                score += 0
+                score += -3
             else:
+                continue
                 score += 2
         
         return score
