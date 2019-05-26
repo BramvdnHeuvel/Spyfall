@@ -201,7 +201,7 @@ def find_perfect_event(members):
 
     options = []
 
-    for event in events[0:3]:
+    for event in events[0:5]:
         option = {
             "name": event["name"],
             "desc": event["desc"],
