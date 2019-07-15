@@ -134,6 +134,25 @@ def evil_sister_image():
     send_to_webhook('Somebody got the sisters\' picture.')
     return render_template('sisters.html')
 
+@app.route('/my-guess/<name>/<location>')
+def guess(name, location):
+    send_to_webhook(f"The Bitter **{name}** made a guess:\n```{location}```")
+    return 'Okay! Your guess has been submitted! The first to predict it correctly (without guessing dozens of options) wins the puzzle game!'
+
+@app.route('/bit.ly/test')
+def obvious_hint():
+    return '==> B'
+
+@app.route('/erinsletter/<answer>')
+def erins_answer(answer):
+    if answer.lower() == 'yes':
+        return render_template('correctletter.html')
+    else:
+        return f"When Erin sent a letter, its content did not say <b>\"{answer}\"</b>, unfortunately."
+
+@app.route('/chris-messina')
+def chris_buddy():
+    return '==> O'
 
 @app.route('/api/v1/keuzes/addevent/<name>/<description>')
 def request_event(name, description):
@@ -214,6 +233,11 @@ def find_perfect_event(members):
 @app.route('/keuzemenu/results')
 def get_keuzemenu_results():
     return render_template('options.html')
+
+@app.route('/countdown')
+def final_hints():
+    info = data.create_hints()
+    return render_template('advent.html', calendar=info)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

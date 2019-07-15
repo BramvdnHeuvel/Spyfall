@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Keuzemenu</title>
+        <link rel="stylesheet" type="text/css" href="/static/acccordion.css">
+
+        <script src="/static/vue_offline.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <script src="/static/tools.js"></script>
+    </head>
+    <body>
+        {% for day in calendar %}
+            <div id="{{ day.number }}">
+                <button class="accordion">
+                    <div class="databox" style="left: 10px;font-size:31px;">
+                        {% if day.solved %}{{ day.letter }}: {% endif %}
+                        {{ day.number }}
+                    </div>
+                    <div class="databox" style="right:0;bottom:0;top:auto;">{{ day.solved }}</div>
+                </button>
+                <div class="panel" style="position: relative">
+                    {% if day.opened %}
+                        <p style="left: 10px;font-size:31px;">{{ day.desc }}</p>
+                        {% if day.solved %}<h1>{{ day.letter }}</h1>{% endif %}
+                    {% else %}
+                        <p style="left: 10px;font-size:31px;"><b>This puzzle isn't available yet.</b></B></p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <script src="/static/accordion.js"></script>
+    </body>
+</html>

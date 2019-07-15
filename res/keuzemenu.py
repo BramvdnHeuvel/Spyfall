@@ -145,9 +145,9 @@ events = [
         'yes': ['Brom'],
         'probably': ['Harissa', 'Egdar'],
         'maybe': ['Mork', 'Swammy', 'Riineer', 'Mickey'],
-        'hmm': [],
+        'hmm': ['Meesje'],
         'no': [],
-        'NA': ['Meesje', "Seneca"],
+        'NA': ["Seneca"],
     },
     {
         'name': 'Truffels',
@@ -156,8 +156,8 @@ events = [
         'probably': ['Egdar', 'Riineer'],
         'maybe': [],
         'hmm': ['Brom'],
-        'no': ['Mork', 'Mickey'],
-        'NA': ['Harissa', 'Meesje', "Seneca"],
+        'no': ['Mork', 'Mickey', 'Meesje'],
+        'NA': ['Harissa', "Seneca"],
     }
 ]
 
