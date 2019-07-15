@@ -224,7 +224,7 @@ def create_hints():
         },
         {
             'number' : 14,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'E',
             'opened' : look_at_time(14),
             'desc'   : 'Hmmmm...... Team Unilever would sure thing enjoy making an anagram out of "YO MOMMA\'S"!'
