@@ -150,7 +150,7 @@ def create_hints():
             'solved' : False,
             'letter' : 'D',
             'opened' : look_at_time(3),
-            'desc'   : 'Snapchat is mostly known for its augmented reality filters.'
+            'desc'   : 'The answer to where we\'re going, is written behind the Nick Cage painting.'
         },
         {
             'number' : 4,
@@ -164,11 +164,11 @@ def create_hints():
             'solved' : False,
             'letter' : 'N',
             'opened' : look_at_time(5),
-            'desc'   : 'The answer to where we\'re going, is written behind the Nick Cage painting.'
+            'desc'   : 'Snapchat is mostly known for its augmented reality filters.'
         },
         {
             'number' : 6,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'N',
             'opened' : look_at_time(6),
             'desc'   : 'MOM\'s MAYO'
@@ -182,7 +182,7 @@ def create_hints():
         },
         {
             'number' : 8,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'N',
             'opened' : look_at_time(8),
             'desc'   : '/erinsletter/answer'
