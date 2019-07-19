@@ -253,7 +253,7 @@ def add_one_to_the_score():
 def buy_an_item(item):
     return jsonify(buy(item))
 
-@app.route('/api/clicker/ban')
+@app.route('/clicker/ban')
 def ban_all_cookies():
     return ban()
 

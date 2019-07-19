@@ -1,3 +1,4 @@
+from res.bot import send_public_message
 import time
 
 class Clicker:
@@ -5,7 +6,7 @@ class Clicker:
         self.COOKIE_SCORE = 0
 
         self.RATS = 0            # 0.1 COOKIES PER SECOND
-        self.SIJMENS = 1         # 5 COOKIES PER SECOND
+        self.SIJMENS = 0         # 5 COOKIES PER SECOND
         self.TANK_SHARKS = 0     # 100 COOKIES PER SECOND
         self.DEMABES = 0         # 20'000 COOKIES PER SECOND
 
@@ -15,13 +16,14 @@ class Clicker:
         self.clicks = 0
         
     def refresh_counter(self):
-        print(self.clicks)
         if self.clicks > 70:
             self.punish()
         self.clicks = 0
     
     def punish(self):
         """Punish them if they're too quick!"""
+        print('GET PURGED!')
+        send_public_message(self.data())
         self.COOKIE_SCORE = 0
 
         self.RATS = 0            # 0.1 COOKIES PER SECOND
@@ -83,6 +85,10 @@ class Clicker:
 
         now = time.time()
         
+        if abs(now - self.CLICK_TIME) > 120:
+            self.CLICK_TIME = now
+            self.punish()
+
         self.COOKIE_SCORE += abs(now - self.TIME) * (0.1*self.RATS + 5*self.SIJMENS + 100*self.TANK_SHARKS + 2000*self.DEMABES)
         self.TIME = now
         self.refresh_counter()
