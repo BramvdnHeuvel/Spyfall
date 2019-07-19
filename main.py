@@ -239,6 +239,24 @@ def final_hints():
     info = data.create_hints()
     return render_template('advent.html', calendar=info)
 
+@app.route('/clicker')
+def cookie_clicker():
+    return render_template('circle.html')
+
+from res.cookie import clicker, buy, ban
+
+@app.route('/api/v1/get-one-up')
+def add_one_to_the_score():
+    return jsonify(clicker())
+
+@app.route('/api/v1/buy/<item>')
+def buy_an_item(item):
+    return jsonify(buy(item))
+
+@app.route('/api/clicker/ban')
+def ban_all_cookies():
+    return ban()
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         port = int(os.environ.get('PORT', 5000))

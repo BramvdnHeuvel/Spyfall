@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>
+            Yum yum
+        </title>
+        <script src="/static/vue_offline.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <script src="/static/tools.js"></script>
+    </head>
+    <body>
+        <style>
+            #circle {
+                width: 300px;
+                height: 300px;
+                background: red;
+                -moz-border-radius: 50px;
+                -webkit-border-radius: 50px;
+                border-radius: 150px;
+            } 
+            button {
+                display: inline-block;
+                height: 134px;
+                padding: 0;
+                margin: 0;
+                vertical-align: top;
+                width: 104px;
+            }
+            #close-image img {
+                display: block;
+                height: 130px;  
+                width: 100px;
+            }
+        </style>
+        <div id="clicker" style="
+            margin-top: 100px;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-bottom: 100px;
+            position: absolute;"
+        >
+            {% raw %}
+                <div>
+                    <h1 style="margin-left:120px;">Score:{{ score }}</h1>
+                    <img src="/static/cookie.png" v-on:click="addCookie()">
+                </div>
+                <div>
+                    <button id="close-image" v-on:click="buy('rat')"><img src="/static/rat.jpg">Rats: {{rats}} - €{{ratPrice}}</button>
+                    <button id="close-image" v-on:click="buy('sijmen')"><img src="/static/cookie.png">Sijmens: {{sijmens}} - €{{sijmenPrice}}</button>
+                    <button id="close-image" v-on:click="buy('tank_shark')"><img src="/static/shark.jpg">Tank Sharks: {{tankSharks}} - €{{tankSharkPrice}}</button>
+                    <button id="close-image" v-on:click="buy('demabe')"><img src="/static/question.png">DEMABEs: {{demabes}} - €{{demabePrice}}</button>
+                </div>
+            {% endraw %}
+        </div>
+        <script>
+            var clicker = new Vue({
+                el: "#clicker",
+                data: {
+                    score: 0,
+                    rats: 0,
+                    ratPrice: 0,
+                    sijmens: 0,
+                    sijmenPrice: 0,
+                    tankSharks: 0,
+                    tankSharkPrice: 0,
+                    demabes: 0,
+                    demabePrice: 0
+                },
+                methods: {
+                    updateSelf: function(data) {
+                        var self = this;
+
+                        self.score = data.score;
+
+                        self.rats = data.rats;
+                        self.ratPrice = data.ratPrice;
+                        self.sijmens = data.sijmens;
+                        self.sijmenPrice = data.sijmenPrice;
+                        self.tankSharks = data.tankSharks;
+                        self.tankSharkPrice = data.tankSharkPrice;
+                        self.demabes = data.demabes;
+                        self.demabePrice = data.demabePrice;
+                    },
+                    addCookie: function() {
+                        var self = this;
+                        getData("/api/v1/get-one-up", self.updateSelf);
+                    },
+                    buy: function(item) {
+                        var self = this;
+                        getData("/api/v1/buy/" + item, self.updateSelf);
+                    },
+                    ping: function() {
+                        var self = this;
+                        getData("/api/v1/buy/nothing", self.updateSelf);
+                    }
+                }
+            });
+
+            clicker.ping();
+            window.setInterval(clicker.ping, 200);
+        </script>
+    </body>
+</html>
