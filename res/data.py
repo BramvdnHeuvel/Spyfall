@@ -199,7 +199,7 @@ def create_hints():
             'solved' : False,
             'letter' : 'E',
             'opened' : look_at_time(10),
-            'desc'   : '/cookieclicker'
+            'desc'   : 'http://spyfal.herokuapp.com/clicker'
         },
         {
             'number' : 11,
@@ -210,7 +210,7 @@ def create_hints():
         },
         {
             'number' : 12,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'G',
             'opened' : look_at_time(12),
             'desc'   : 'Go to /my-guess/<yourname>/<thelocation> to submit a guess where we\'re going to!'

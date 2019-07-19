@@ -23,7 +23,8 @@ class Clicker:
     def punish(self):
         """Punish them if they're too quick!"""
         print('GET PURGED!')
-        send_public_message(self.data())
+        if self.COOKIE_SCORE > 0:
+            send_public_message(self.data())
         self.COOKIE_SCORE = 0
 
         self.RATS = 0            # 0.1 COOKIES PER SECOND
