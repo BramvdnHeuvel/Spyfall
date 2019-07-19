@@ -189,21 +189,21 @@ def create_hints():
         },
         {
             'number' : 9,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'B',
             'opened' : look_at_time(9),
             'desc'   : '==> J    \n==> W    \n==> K    \n==> F'
         },
         {
             'number' : 10,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'E',
             'opened' : look_at_time(10),
             'desc'   : 'http://spyfal.herokuapp.com/clicker'
         },
         {
             'number' : 11,
-            'solved' : False,
+            'solved' : True,
             'letter' : 'L',
             'opened' : look_at_time(11),
             'desc'   : '==> H    \n==> C   \n==> T   \n==> P'
