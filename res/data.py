@@ -168,10 +168,10 @@ def create_hints():
         },
         {
             'number' : 6,
-            'solved' : True,
+            'solved' : False,
             'letter' : 'N',
             'opened' : look_at_time(6),
-            'desc'   : 'MOM\'s MAYO'
+            'desc'   : 'There\'s a post-it in the Shark Tank hanging there for months - I can\'t believe it\'s still there!'
         },
         {
             'number' : 7,
